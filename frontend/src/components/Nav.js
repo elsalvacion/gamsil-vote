@@ -7,7 +7,7 @@ const Nav = () => {
   const { userInfo } = useSelector((state) => state.userLogin);
   const dispatch = useDispatch();
   return (
-    <div className="bg-gradient-to-r  from-red-400 text-center py-5 px-2 mb-2 flex justify-between px-2">
+    <div className="bg-gradient-to-r  from-red-400 text-center py-5 px-2 flex justify-between px-2">
       <Link to="/home">GAMSIL VOTE</Link>
       {userInfo && (
         <div>

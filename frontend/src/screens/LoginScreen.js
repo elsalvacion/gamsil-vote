@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import Card from "../components/Card";
 import GoogleLoginBtn from "../components/GoogleLoginBtn";
 
 const LoginScreen = () => {
@@ -10,8 +11,8 @@ const LoginScreen = () => {
     if (userInfo) history.push("/home");
   }, [userInfo, history]);
   return (
-    <div className="h-screen w-screen flex justify-center items-center bg-gradient-to-b  from-blue-400 via-white to-green-400 ">
-      <div className="bg-white rounded p-4 w-10/12 md:w-1/2 shadow-md  mt-16">
+    <div className="h-screen  flex justify-center items-center ">
+      <Card>
         <img
           src="/assets/gamsil.jpeg"
           alt="gamsil"
@@ -30,7 +31,7 @@ const LoginScreen = () => {
 
         {/* google login */}
         <GoogleLoginBtn />
-      </div>
+      </Card>
     </div>
   );
 };

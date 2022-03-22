@@ -2,12 +2,15 @@ const router = require("express").Router();
 const { body, validationResult } = require("express-validator");
 const connection = require("../config/db");
 const jwt = require("jsonwebtoken");
+const { userProtect, adminProtect } = require("../middleware/protect");
 
 // register user
 router.post(
   "/register",
   body("email").isEmail().withMessage("Invalid Email"),
   body("email").notEmpty().withMessage("Email is required"),
+  userProtect,
+  adminProtect,
   (req, res) => {
     try {
       const errors = validationResult(req);
@@ -22,7 +25,7 @@ router.post(
           0,
           Date.now().toString(),
           Date.now().toString(),
-          "steps",
+          req.user.email,
         ],
         (emailInsertError, emailInsertResults) => {
           if (emailInsertError) {
@@ -122,7 +125,7 @@ router.post(
 );
 
 // get all users
-router.get("/", (req, res) => {
+router.get("/", userProtect, adminProtect, (req, res) => {
   try {
     connection.query(
       `select * from users `,
@@ -153,7 +156,7 @@ router.get("/", (req, res) => {
   }
 });
 // get user
-router.get("/:id", (req, res) => {
+router.get("/:id", userProtect, adminProtect, (req, res) => {
   try {
     connection.query(
       `select * from users where id = ?`,
@@ -192,7 +195,7 @@ router.get("/:id", (req, res) => {
   }
 });
 // update user
-router.put("/:id", (req, res) => {
+router.put("/:id", userProtect, adminProtect, (req, res) => {
   try {
     connection.query(
       `select * from users where id = ?`,
@@ -219,7 +222,7 @@ router.put("/:id", (req, res) => {
             const isAdmin = req.body.isAdmin || fetchUserResult[0].isAdmin;
             const email = req.body.email || fetchUserResult[0].email;
             const updatedAt = Date.now().toString();
-            const updatedBy = "steps";
+            const updatedBy = req.user.email;
 
             connection.query(
               `update  users set isAdmin = ?, email = ?, updatedAt = ? , updatedBy = ? where id = ?`,
@@ -252,7 +255,7 @@ router.put("/:id", (req, res) => {
   }
 });
 // delete user
-router.delete("/:id", (req, res) => {
+router.delete("/:id", userProtect, adminProtect, (req, res) => {
   try {
     connection.query(
       `select * from users where id = ?`,

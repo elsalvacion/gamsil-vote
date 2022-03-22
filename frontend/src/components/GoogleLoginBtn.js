@@ -6,7 +6,6 @@ const GoogleLoginBtn = () => {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.userLogin);
   const responseGoogle = (response) => {
-    console.log(response.Du);
     dispatch(loginUser(response.Du.tv));
   };
   return (
