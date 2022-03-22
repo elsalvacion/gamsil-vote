@@ -86,7 +86,7 @@ router.post(
               res.status(400).json({
                 errors: [
                   {
-                    msg: "Your are not registered, contact admin.",
+                    msg: "You are not registered, contact admin.",
                   },
                 ],
               });
