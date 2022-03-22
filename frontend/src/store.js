@@ -1,6 +1,13 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
-import { userLoginReducer } from "./reducers/userReducer";
+import {
+  deleteUserReducer,
+  editUserReducer,
+  fetchSingleUserReducer,
+  fetchUserReducer,
+  registerUserReducer,
+  userLoginReducer,
+} from "./reducers/userReducer";
 
 const initialState = {
   userLogin: {
@@ -12,6 +19,11 @@ const initialState = {
 
 const reducers = combineReducers({
   userLogin: userLoginReducer,
+  fetchUser: fetchUserReducer,
+  registerUser: registerUserReducer,
+  deleteUser: deleteUserReducer,
+  editUser: editUserReducer,
+  fetchSingleUser: fetchSingleUserReducer,
 });
 
 const store = createStore(reducers, initialState, applyMiddleware(thunk));

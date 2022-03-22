@@ -3,6 +3,8 @@ import Nav from "./components/Nav";
 import AdminPanelSceen from "./screens/AdminPanelSceen";
 import CandidateScreen from "./screens/CandidateScreen";
 import CategoryScreen from "./screens/CategoryScreen";
+import CreateUserScreen from "./screens/CreateUserScreen";
+import EditUserScreen from "./screens/EditUserScreen";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import StartOStopVoteScreen from "./screens/StartOStopVoteScreen";
@@ -25,6 +27,8 @@ const App = () => {
             component={StartOStopVoteScreen}
           />
           <Route exact path="/user" component={UserScreen} />
+          <Route exact path="/edit-user/:id" component={EditUserScreen} />
+          <Route exact path="/create-user" component={CreateUserScreen} />
         </div>
       </Switch>
     </BrowserRouter>

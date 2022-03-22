@@ -99,7 +99,7 @@ router.post(
                   ...fetchUserResult[0],
                   token: jwt.sign(
                     {
-                      id: fetchUserResult[0],
+                      id: fetchUserResult[0].id,
                     },
                     process.env.JWT_SECRET,
                     {
@@ -128,8 +128,7 @@ router.post(
 router.get("/", userProtect, adminProtect, (req, res) => {
   try {
     connection.query(
-      `select * from users `,
-      [],
+      `select * from users order by id desc`,
       (fetchUserError, fetchUserResult) => {
         if (fetchUserError) {
           res.status(400).json({
@@ -197,6 +196,7 @@ router.get("/:id", userProtect, adminProtect, (req, res) => {
 // update user
 router.put("/:id", userProtect, adminProtect, (req, res) => {
   try {
+    console.log(req.body);
     connection.query(
       `select * from users where id = ?`,
       [req.params.id],
@@ -219,8 +219,8 @@ router.put("/:id", userProtect, adminProtect, (req, res) => {
               ],
             });
           } else {
-            const isAdmin = req.body.isAdmin || fetchUserResult[0].isAdmin;
-            const email = req.body.email || fetchUserResult[0].email;
+            const isAdmin = req.body.isAdmin ? 1 : 0;
+            const email = req.body.email;
             const updatedAt = Date.now().toString();
             const updatedBy = req.user.email;
 
