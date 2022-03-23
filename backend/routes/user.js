@@ -44,7 +44,7 @@ router.post(
                 ],
               });
           } else {
-            res.status(200).json({ message: "User created" });
+            res.status(200).json({ msg: "User created" });
           }
         }
       );
@@ -196,7 +196,6 @@ router.get("/:id", userProtect, adminProtect, (req, res) => {
 // update user
 router.put("/:id", userProtect, adminProtect, (req, res) => {
   try {
-    console.log(req.body);
     connection.query(
       `select * from users where id = ?`,
       [req.params.id],

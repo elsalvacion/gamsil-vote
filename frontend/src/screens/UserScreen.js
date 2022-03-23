@@ -29,14 +29,13 @@ const UserScreen = () => {
         dispatch({
           type: DELETE_USER_RESET,
         });
-      if (editSuccess) {
-        dispatch({
-          type: UPDATE_USER_RESET,
-        });
-        dispatch({
-          type: FETCH_SINGLE_USER_RESET,
-        });
-      }
+
+      dispatch({
+        type: UPDATE_USER_RESET,
+      });
+      dispatch({
+        type: FETCH_SINGLE_USER_RESET,
+      });
       dispatch(fetchUsers());
     }
   }, [userInfo, history, dispatch, deleteSuccess, editSuccess]);
