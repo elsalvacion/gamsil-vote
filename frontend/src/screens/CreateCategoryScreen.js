@@ -8,17 +8,20 @@ import { CREATE_CATEGORY_RESET } from "../reducers/types/categoryTypes";
 import { createCategory } from "../actions/categoryAction";
 const CreateCategoryScreen = () => {
   const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.userLogin);
+
   const { loading, errors, success } = useSelector(
     (state) => state.createCategory
   );
   const history = useHistory();
   useEffect(() => {
+    if (!userInfo || !Number(userInfo.isAdmin)) history.push("/");
     if (success) history.push("/category");
 
     dispatch({
       type: CREATE_CATEGORY_RESET,
     });
-  }, [success, history, dispatch]);
+  }, [success, history, dispatch, userInfo]);
   const [title, setTitle] = useState("");
 
   const [formErrors, setFormErrors] = useState([]);

@@ -1,15 +1,20 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Card from "../components/Card";
 import GoogleLoginBtn from "../components/GoogleLoginBtn";
+import { VERIFY_USER_RESET } from "../reducers/types/userTypes";
 
 const LoginScreen = () => {
   const { userInfo, errors } = useSelector((state) => state.userLogin);
   const history = useHistory();
+  const dispatch = useDispatch();
   useEffect(() => {
     if (userInfo) history.push("/home");
-  }, [userInfo, history]);
+    dispatch({
+      type: VERIFY_USER_RESET,
+    });
+  }, [userInfo, history, dispatch]);
   return (
     <div className="h-screen  flex justify-center items-center ">
       <Card>

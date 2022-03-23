@@ -23,6 +23,10 @@ import {
   USER_LOGIN_LOADING,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
+  VERIFY_USER_ERROR,
+  VERIFY_USER_LOADING,
+  VERIFY_USER_RESET,
+  VERIFY_USER_SUCCESS,
 } from "./types/userTypes";
 
 export const userLoginReducer = (state = {}, action) => {
@@ -147,6 +151,27 @@ export const editUserReducer = (state = {}, action) => {
         errors: action.payload,
       };
     case UPDATE_USER_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const verifyUserReducer = (state = {}, action) => {
+  switch (action.type) {
+    case VERIFY_USER_LOADING:
+      return {
+        loading: true,
+      };
+    case VERIFY_USER_SUCCESS:
+      return {
+        success: true,
+      };
+    case VERIFY_USER_ERROR:
+      return {
+        errors: action.payload,
+      };
+    case VERIFY_USER_RESET:
       return {};
     default:
       return state;

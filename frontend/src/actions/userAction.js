@@ -19,9 +19,11 @@ import {
   USER_LOGIN_LOADING,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
+  VERIFY_USER_ERROR,
+  VERIFY_USER_LOADING,
+  VERIFY_USER_SUCCESS,
 } from "../reducers/types/userTypes";
 export const loginUser = (email) => async (dispatch) => {
-  console.log(email);
   try {
     dispatch({
       type: USER_LOGIN_LOADING,
@@ -36,7 +38,6 @@ export const loginUser = (email) => async (dispatch) => {
         "Content-Type": "application/json",
       }
     );
-    console.log(data);
     dispatch({
       type: USER_LOGIN_SUCCESS,
       payload: data.msg,
@@ -269,6 +270,26 @@ export const updateUser = (id, details) => async (dispatch, getState) => {
     });
     dispatch({
       type: UPDATE_USER_ERROR,
+      payload: err.response.data.errors,
+    });
+  }
+};
+
+export const verifyUser = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: VERIFY_USER_LOADING,
+    });
+
+    const { data } = await axios.get(`/user/verify/${id}`);
+    if (data)
+      dispatch({
+        type: VERIFY_USER_SUCCESS,
+      });
+  } catch (err) {
+    console.log(err.response);
+    dispatch({
+      type: VERIFY_USER_ERROR,
       payload: err.response.data.errors,
     });
   }

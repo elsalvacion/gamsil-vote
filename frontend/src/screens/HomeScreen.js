@@ -7,6 +7,9 @@ const HomeScreen = () => {
   const history = useHistory();
   useEffect(() => {
     if (!userInfo) history.push("/");
+    else {
+      if (!Number(userInfo.isVerified)) history.push("/not-verified");
+    }
   }, [userInfo, history]);
   return <div className="px-2">HomeScreen</div>;
 };

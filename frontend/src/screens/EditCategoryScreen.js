@@ -19,7 +19,7 @@ const EditCategoryScreen = () => {
   const history = useHistory();
   const { id } = useParams();
   useEffect(() => {
-    if (!userInfo) history.push("/");
+    if (!userInfo || !Number(userInfo.isAdmin)) history.push("/");
     else {
       if (success) history.push("/category");
       if (category) {

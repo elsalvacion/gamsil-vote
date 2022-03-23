@@ -11,14 +11,18 @@ const CreateUserScreen = () => {
   const { loading, errors, success } = useSelector(
     (state) => state.registerUser
   );
+
+  const { userInfo } = useSelector((state) => state.userLogin);
+
   const history = useHistory();
   useEffect(() => {
+    if (!userInfo || !Number(userInfo.isAdmin)) history.push("/");
     if (success) history.push("/user");
 
     dispatch({
       type: REGISTER_USER_RESET,
     });
-  }, [success, history, dispatch]);
+  }, [success, history, dispatch, userInfo]);
   const [values, setValues] = useState({
     email: "",
     isAdmin: false,

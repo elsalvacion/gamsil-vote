@@ -9,17 +9,22 @@ import EditCategoryScreen from "./screens/EditCategoryScreen";
 import EditUserScreen from "./screens/EditUserScreen";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
+import NotVerifiedScreen from "./screens/NotVerifiedScreen";
 import StartOStopVoteScreen from "./screens/StartOStopVoteScreen";
 import UserScreen from "./screens/UserScreen";
+import VerifyUserScreen from "./screens/VerifyUserScreen";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Nav />
       <Switch>
-        <div className="pt-3 h-screen bg-gradient-to-b  from-blue-400 via-white to-green-400">
+        <div className="pt-3 h-screen bg-gradient-to-b  from-blue-900 via-white to-green-900">
           <Route exact path="/" component={LoginScreen} />
           <Route exact path="/home" component={HomeScreen} />
+          <Route exact path="/not-verified" component={NotVerifiedScreen} />
+          <Route exact path="/verify/:id" component={VerifyUserScreen} />
+
           <Route exact path="/adminpanel" component={AdminPanelSceen} />
           <Route exact path="/category" component={CategoryScreen} />
           <Route exact path="/candidate" component={CandidateScreen} />

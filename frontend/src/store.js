@@ -14,6 +14,7 @@ import {
   fetchUserReducer,
   registerUserReducer,
   userLoginReducer,
+  verifyUserReducer,
 } from "./reducers/userReducer";
 
 const initialState = {
@@ -36,6 +37,7 @@ const reducers = combineReducers({
   deleteCategory: deleteCategoryReducer,
   editCategory: editCategoryReducer,
   fetchSingleCategory: fetchSingleCategoryReducer,
+  verifyUser: verifyUserReducer,
 });
 
 const store = createStore(reducers, initialState, applyMiddleware(thunk));

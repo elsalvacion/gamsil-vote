@@ -6,7 +6,7 @@ const AdminPanelSceen = () => {
   const { userInfo } = useSelector((state) => state.userLogin);
   const history = useHistory();
   useEffect(() => {
-    if (!userInfo) history.push("/");
+    if (!userInfo || !Number(userInfo.isAdmin)) history.push("/");
   }, [userInfo, history]);
 
   const links = [

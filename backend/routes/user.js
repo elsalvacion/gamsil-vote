@@ -3,6 +3,7 @@ const { body, validationResult } = require("express-validator");
 const connection = require("../config/db");
 const jwt = require("jsonwebtoken");
 const { userProtect, adminProtect } = require("../middleware/protect");
+const { sendEmail } = require("../utils/sendVerifyEmail");
 
 // register user
 router.post(
@@ -44,6 +45,7 @@ router.post(
                 ],
               });
           } else {
+            sendEmail(req.body.email);
             res.status(200).json({ msg: "User created" });
           }
         }
@@ -174,7 +176,7 @@ router.get("/:id", userProtect, adminProtect, (req, res) => {
             res.status(400).json({
               errors: [
                 {
-                  msg: "User not found",
+                  msg: "Not a  user. Register with admin",
                 },
               ],
             });
@@ -213,7 +215,7 @@ router.put("/:id", userProtect, adminProtect, (req, res) => {
             res.status(400).json({
               errors: [
                 {
-                  msg: "User not found",
+                  msg: "Not a  user. Register with admin",
                 },
               ],
             });
@@ -253,6 +255,7 @@ router.put("/:id", userProtect, adminProtect, (req, res) => {
     });
   }
 });
+
 // delete user
 router.delete("/:id", userProtect, adminProtect, (req, res) => {
   try {
@@ -273,7 +276,7 @@ router.delete("/:id", userProtect, adminProtect, (req, res) => {
             res.status(400).json({
               errors: [
                 {
-                  msg: "User not found",
+                  msg: "Not a  user. Register with admin",
                 },
               ],
             });
@@ -308,4 +311,60 @@ router.delete("/:id", userProtect, adminProtect, (req, res) => {
     });
   }
 });
+
+router.get("/verify/:id", (req, res) => {
+  try {
+    connection.query(
+      `select * from users where id = ?`,
+      [req.params.id],
+      (fetchUserError, fetchUserResult) => {
+        if (fetchUserError) {
+          res.status(400).json({
+            errors: [
+              {
+                msg: "Database error contact admin",
+              },
+            ],
+          });
+        } else {
+          if (fetchUserResult.length === 0) {
+            res.status(400).json({
+              errors: [
+                {
+                  msg: "Not a  user. Register with admin",
+                },
+              ],
+            });
+          } else {
+            connection.query(
+              `update  users set isVerified = ? where id = ?`,
+              [1, req.params.id],
+              (updateUserError, updateUserResult) => {
+                if (updateUserError)
+                  res.status(400).json({
+                    errors: [
+                      {
+                        msg: "Database error contact admin",
+                      },
+                    ],
+                  });
+                else res.status(200).json({ msg: "Email verified" });
+              }
+            );
+          }
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      errors: [
+        {
+          msg: "update user gone wrong",
+        },
+      ],
+    });
+  }
+});
+
 module.exports = router;
