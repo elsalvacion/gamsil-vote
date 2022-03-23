@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
 import Errors from "../components/Errors";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSingleUser, updateUser } from "../actions/userAction";
 import Spinner from "../components/Spinner";
 import { useHistory, useParams } from "react-router-dom";
-const EditUserScreen = () => {
+import { fetchSingleCategory, updateCategory } from "../actions/categoryAction";
+const EditCategoryScreen = () => {
   const dispatch = useDispatch();
 
-  const { loading, errors, success } = useSelector((state) => state.editUser);
-  const { errors: fetchUserErrors, user } = useSelector(
-    (state) => state.fetchSingleUser
+  const { loading, errors, success } = useSelector(
+    (state) => state.editCategory
+  );
+  const { errors: fetchUserErrors, category } = useSelector(
+    (state) => state.fetchSingleCategory
   );
   const { userInfo } = useSelector((state) => state.userLogin);
 
@@ -19,43 +21,38 @@ const EditUserScreen = () => {
   useEffect(() => {
     if (!userInfo) history.push("/");
     else {
-      if (success) history.push("/user");
-      if (user) {
-        setValues({
-          ...user,
-          isAdmin: Boolean(user.isAdmin),
-        });
+      if (success) history.push("/category");
+      if (category) {
+        setValues(category);
       } else {
-        dispatch(fetchSingleUser(id));
+        dispatch(fetchSingleCategory(id));
       }
     }
-  }, [success, history, dispatch, id, user, userInfo]);
+  }, [success, history, dispatch, id, category, userInfo]);
   const [values, setValues] = useState({
-    email: "",
-    isAdmin: false,
+    title: "",
   });
 
   const [formErrors, setFormErrors] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormErrors([]);
-    if (values.email !== "") {
-      const splitEmail = values.email.split("@");
-      if (splitEmail[1] !== "iut-dhaka.edu")
-        setFormErrors([
-          {
-            msg: "You must use an IUT email",
-          },
-        ]);
-      else dispatch(updateUser(id, values));
+    if (values.title !== "") {
+      dispatch(updateCategory(id, values));
+    } else {
+      setFormErrors([
+        {
+          msg: "Title is required",
+        },
+      ]);
     }
   };
+
   return (
     <div className="h-screen flex justify-center items-center">
       <Card>
         <h2 className="mb-5 font-bold uppercase text-center text-xl">
-          EDIT USER
+          EDIT CATEGORY
         </h2>
 
         {formErrors.length > 0 && <Errors errors={formErrors} />}
@@ -64,31 +61,17 @@ const EditUserScreen = () => {
 
         <form onSubmit={handleSubmit}>
           <label htmlFor="email" className="block">
-            Edit email
+            Edit title
           </label>
           <input
-            type="email"
-            id="email"
-            placeholder="Email"
+            type="text"
+            id="title"
+            placeholder="Title"
             className="border-2 block w-full py-2 rounded px-2 mb-5"
-            value={values.email}
-            onChange={(e) => setValues({ ...values, email: e.target.value })}
+            value={values.title}
+            onChange={(e) => setValues({ ...values, title: e.target.value })}
             required
           />
-
-          <input
-            type="checkbox"
-            id="isAdmin"
-            className="border-2 p-3 rounded mb-5 mr-3"
-            value={values.isAdmin}
-            onChange={(e) =>
-              setValues({ ...values, isAdmin: e.target.checked })
-            }
-            checked={values.isAdmin}
-          />
-          <label htmlFor="isAdmin" className="">
-            Make admin
-          </label>
 
           <button
             type="submit"
@@ -104,4 +87,4 @@ const EditUserScreen = () => {
   );
 };
 
-export default EditUserScreen;
+export default EditCategoryScreen;

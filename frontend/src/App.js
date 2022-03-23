@@ -3,7 +3,9 @@ import Nav from "./components/Nav";
 import AdminPanelSceen from "./screens/AdminPanelSceen";
 import CandidateScreen from "./screens/CandidateScreen";
 import CategoryScreen from "./screens/CategoryScreen";
+import CreateCategoryScreen from "./screens/CreateCategoryScreen";
 import CreateUserScreen from "./screens/CreateUserScreen";
+import EditCategoryScreen from "./screens/EditCategoryScreen";
 import EditUserScreen from "./screens/EditUserScreen";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
@@ -29,6 +31,16 @@ const App = () => {
           <Route exact path="/user" component={UserScreen} />
           <Route exact path="/edit-user/:id" component={EditUserScreen} />
           <Route exact path="/create-user" component={CreateUserScreen} />
+          <Route
+            exact
+            path="/create-category"
+            component={CreateCategoryScreen}
+          />
+          <Route
+            exact
+            path="/edit-category/:id"
+            component={EditCategoryScreen}
+          />
         </div>
       </Switch>
     </BrowserRouter>

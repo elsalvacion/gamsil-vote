@@ -68,8 +68,11 @@ const UserScreen = () => {
             {users && users.length > 0 ? (
               <>
                 {users.map((user) => (
-                  <div key={user.id} className="flex justify-between">
-                    <p>{user.email}</p>
+                  <div
+                    key={user.id}
+                    className="flex justify-between flex-wrap mb-3"
+                  >
+                    <p className="mb-1">{user.email}</p>
                     <div>
                       <button
                         className="mx-2"

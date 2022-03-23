@@ -1,6 +1,13 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import {
+  createCategoryReducer,
+  deleteCategoryReducer,
+  editCategoryReducer,
+  fetchCategoryReducer,
+  fetchSingleCategoryReducer,
+} from "./reducers/categoryReducer";
+import {
   deleteUserReducer,
   editUserReducer,
   fetchSingleUserReducer,
@@ -24,6 +31,11 @@ const reducers = combineReducers({
   deleteUser: deleteUserReducer,
   editUser: editUserReducer,
   fetchSingleUser: fetchSingleUserReducer,
+  fetchCategory: fetchCategoryReducer,
+  createCategory: createCategoryReducer,
+  deleteCategory: deleteCategoryReducer,
+  editCategory: editCategoryReducer,
+  fetchSingleCategory: fetchSingleCategoryReducer,
 });
 
 const store = createStore(reducers, initialState, applyMiddleware(thunk));
