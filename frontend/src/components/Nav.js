@@ -12,7 +12,7 @@ const Nav = () => {
         to="/home"
         className="flex items-center text-white hover:text-gray-300"
       >
-        <FaVoteYea fontSize={24} className="" />{" "}
+        <FaVoteYea fontSize={24} />{" "}
         <span className="ml-2  text-xl font-bold">GAMSIL VOTE</span>
       </Link>
       {userInfo && (
@@ -20,14 +20,14 @@ const Nav = () => {
           {Number(userInfo.isAdmin) ? (
             <Link
               to="/adminpanel"
-              className="px-3 py-2 border-2 border-gray-800 rounded-sm mx-1 hover:bg-gray-900 hover:text-gray-50 hover:border-gray-50"
+              className="px-3 text-blue-900 py-2 border-2 border-blue-800 rounded-sm mx-1 hover:bg-blue-900 hover:text-gray-50 hover:border-gray-50"
             >
               ADMIN PANEL
             </Link>
           ) : null}
           <Link
             to="#!"
-            className="px-3 py-2 border-2 border-gray-800 rounded-sm mx-1 hover:bg-gray-900 hover:text-gray-50 hover:border-gray-50"
+            className="px-3 text-blue-900 py-2 border-2 border-blue-800 rounded-sm mx-1 hover:bg-blue-900 hover:text-gray-50 hover:border-gray-50"
             onClick={() => dispatch(logoutUser())}
           >
             LOGOUT

@@ -60,7 +60,7 @@ router.post(
 router.get("/", userProtect, adminProtect, (req, res) => {
   try {
     connection.query(
-      `select * from category order by title desc`,
+      `select * from category order by id desc`,
       (fetchCategoryErr, fetchCategoryRes) => {
         if (fetchCategoryErr) {
           res.status(400).json({
@@ -131,8 +131,8 @@ router.put("/:id", userProtect, adminProtect, (req, res) => {
     connection.query(
       `select * from category where id = ?`,
       [req.params.id],
-      (fetchUserError, fetchUserResult) => {
-        if (fetchUserError) {
+      (fetchCategoryError, fetchCategoryResult) => {
+        if (fetchCategoryError) {
           res.status(400).json({
             errors: [
               {
@@ -141,11 +141,11 @@ router.put("/:id", userProtect, adminProtect, (req, res) => {
             ],
           });
         } else {
-          if (fetchUserResult.length === 0) {
+          if (fetchCategoryResult.length === 0) {
             res.status(400).json({
               errors: [
                 {
-                  msg: "User not found",
+                  msg: "Category not found",
                 },
               ],
             });
