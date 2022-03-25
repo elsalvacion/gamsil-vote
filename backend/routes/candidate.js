@@ -10,6 +10,7 @@ router.post(
   adminProtect,
   body("name").notEmpty().withMessage("Name is required"),
   body("category").notEmpty().withMessage("Category is required"),
+  body("image").notEmpty().withMessage("Image is required"),
   (req, res) => {
     try {
       const errors = validationResult(req);
@@ -22,7 +23,7 @@ router.post(
         [
           req.body.name,
           req.body.category,
-          "",
+          req.body.image,
           Date.now().toString(),
           Date.now().toString(),
           req.user.email,
@@ -217,7 +218,7 @@ router.delete("/:id", userProtect, adminProtect, (req, res) => {
             });
           } else {
             connection.query(
-              `delete from Candidate where id = ?`,
+              `delete from candidate where id = ?`,
               [req.params.id],
               (deleteCandidateErr, deleteCandidateRes) => {
                 if (deleteCandidateErr)

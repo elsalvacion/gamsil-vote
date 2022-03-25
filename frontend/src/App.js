@@ -3,6 +3,7 @@ import Nav from "./components/Nav";
 import AdminPanelSceen from "./screens/AdminPanelSceen";
 import CandidateScreen from "./screens/CandidateScreen";
 import CategoryScreen from "./screens/CategoryScreen";
+import CreateCandidateScreen from "./screens/CreateCandidateScreen";
 import CreateCategoryScreen from "./screens/CreateCategoryScreen";
 import CreateUserScreen from "./screens/CreateUserScreen";
 import EditCategoryScreen from "./screens/EditCategoryScreen";
@@ -28,6 +29,11 @@ const App = () => {
           <Route exact path="/adminpanel" component={AdminPanelSceen} />
           <Route exact path="/category" component={CategoryScreen} />
           <Route exact path="/candidate" component={CandidateScreen} />
+          <Route
+            exact
+            path="/create-candidate"
+            component={CreateCandidateScreen}
+          />
           <Route
             exact
             path="/start-or-stop-vote"

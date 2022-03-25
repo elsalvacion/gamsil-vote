@@ -1,6 +1,14 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import {
+  createCandidateReducer,
+  deleteCandidateReducer,
+  editCandidateReducer,
+  fetchCandidateReducer,
+  fetchSingleCandidateReducer,
+  uploadImageReducer,
+} from "./reducers/candidateReducer";
+import {
   createCategoryReducer,
   deleteCategoryReducer,
   editCategoryReducer,
@@ -32,12 +40,18 @@ const reducers = combineReducers({
   deleteUser: deleteUserReducer,
   editUser: editUserReducer,
   fetchSingleUser: fetchSingleUserReducer,
+  verifyUser: verifyUserReducer,
   fetchCategory: fetchCategoryReducer,
   createCategory: createCategoryReducer,
   deleteCategory: deleteCategoryReducer,
   editCategory: editCategoryReducer,
   fetchSingleCategory: fetchSingleCategoryReducer,
-  verifyUser: verifyUserReducer,
+  fetchCandidate: fetchCandidateReducer,
+  createCandidate: createCandidateReducer,
+  deleteCandidate: deleteCandidateReducer,
+  editCandidate: editCandidateReducer,
+  fetchSingleCandidate: fetchSingleCandidateReducer,
+  uploadImage: uploadImageReducer,
 });
 
 const store = createStore(reducers, initialState, applyMiddleware(thunk));
