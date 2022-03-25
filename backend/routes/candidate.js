@@ -65,8 +65,10 @@ router.post(
 // get all candidate
 router.get("/", userProtect, adminProtect, (req, res) => {
   try {
+    const query = req.query.category ? ` where category = ? ` : "";
     connection.query(
-      `select * from candidate order by id desc`,
+      `select * from candidate ${query} order by id desc`,
+      [req.query.category ? req.query.category : null],
       (fetchCandidateErr, fetchCandidateRes) => {
         if (fetchCandidateErr) {
           res.status(400).json({

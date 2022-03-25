@@ -42,7 +42,7 @@ export const fetchCategory = () => async (dispatch, getState) => {
     });
   } catch (err) {
     console.log(err.response);
-    err.response.forEach((error) => {
+    err.response.data.errors.forEach((error) => {
       if (
         error.msg === "Not Authorized: No Token" ||
         error.msg === "Not Authorized: Invalid User" ||
@@ -82,7 +82,7 @@ export const fetchSingleCategory = (id) => async (dispatch, getState) => {
     });
   } catch (err) {
     console.log(err.response);
-    err.response.forEach((error) => {
+    err.response.data.errors.forEach((error) => {
       if (
         error.msg === "Not Authorized: No Token" ||
         error.msg === "Not Authorized: Invalid User" ||
@@ -129,7 +129,7 @@ export const createCategory = (title) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    err.response.forEach((error) => {
+    err.response.data.errors.forEach((error) => {
       if (
         error.msg === "Not Authorized: No Token" ||
         error.msg === "Not Authorized: Invalid User" ||
@@ -170,7 +170,7 @@ export const deleteCategory = (id) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    err.response.forEach((error) => {
+    err.response.data.errors.forEach((error) => {
       if (
         error.msg === "Not Authorized: No Token" ||
         error.msg === "Not Authorized: Invalid User" ||
@@ -217,7 +217,7 @@ export const updateCategory = (id, details) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    err.response.forEach((error) => {
+    err.response.data.errors.forEach((error) => {
       if (
         error.msg === "Not Authorized: No Token" ||
         error.msg === "Not Authorized: Invalid User" ||

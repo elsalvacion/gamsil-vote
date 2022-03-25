@@ -84,7 +84,7 @@ export const fetchUsers = () => async (dispatch, getState) => {
     });
   } catch (err) {
     console.log(err.response);
-    err.response.forEach((error) => {
+    err.response.data.errors.forEach((error) => {
       if (
         error.msg === "Not Authorized: No Token" ||
         error.msg === "Not Authorized: Invalid User" ||
@@ -124,7 +124,7 @@ export const fetchSingleUser = (id) => async (dispatch, getState) => {
     });
   } catch (err) {
     console.log(err.response);
-    err.response.forEach((error) => {
+    err.response.data.errors.forEach((error) => {
       if (
         error.msg === "Not Authorized: No Token" ||
         error.msg === "Not Authorized: Invalid User" ||
@@ -171,7 +171,7 @@ export const registerUser = (email) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    err.response.forEach((error) => {
+    err.response.data.errors.forEach((error) => {
       if (
         error.msg === "Not Authorized: No Token" ||
         error.msg === "Not Authorized: Invalid User" ||
@@ -212,7 +212,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    err.response.forEach((error) => {
+    err.response.data.errors.forEach((error) => {
       if (
         error.msg === "Not Authorized: No Token" ||
         error.msg === "Not Authorized: Invalid User" ||
@@ -259,7 +259,7 @@ export const updateUser = (id, details) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    err.response.forEach((error) => {
+    err.response.data.errors.forEach((error) => {
       if (
         error.msg === "Not Authorized: No Token" ||
         error.msg === "Not Authorized: Invalid User" ||

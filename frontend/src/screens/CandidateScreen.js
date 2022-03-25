@@ -111,7 +111,7 @@ const CandidateScreen = () => {
                 ))}
               </>
             ) : (
-              <h2>No category found</h2>
+              <h2>No candidate found</h2>
             )}
           </div>
         )}

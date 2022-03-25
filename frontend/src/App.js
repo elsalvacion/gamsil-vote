@@ -20,7 +20,7 @@ const App = () => {
     <BrowserRouter>
       <Nav />
       <Switch>
-        <div className="pt-3 h-screen bg-gradient-to-b  from-blue-900 via-white to-green-900">
+        <div className="pt-3 min-h-screen  bg-gradient-to-b  from-blue-900 via-white to-green-900">
           <Route exact path="/" component={LoginScreen} />
           <Route exact path="/home" component={HomeScreen} />
           <Route exact path="/not-verified" component={NotVerifiedScreen} />

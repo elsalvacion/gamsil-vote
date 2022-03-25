@@ -21,44 +21,49 @@ import {
 } from "../reducers/types/candidateTypes";
 import { logoutUser } from "./userAction";
 
-export const fetchCandidate = () => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: FETCH_CANDIDATE_LOADING,
-    });
+export const fetchCandidate =
+  (category = "") =>
+  async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: FETCH_CANDIDATE_LOADING,
+      });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
 
-    const { data } = await axios.get("/candidate", config);
-    dispatch({
-      type: FETCH_CANDIDATE_SUCCESS,
-      payload: data.msg,
-    });
-  } catch (err) {
-    console.log(err.response);
-    err.response.forEach((error) => {
-      if (
-        error.msg === "Not Authorized: No Token" ||
-        error.msg === "Not Authorized: Invalid User" ||
-        error.msg === "Not authorized as an admin"
-      ) {
-        dispatch(logoutUser());
-      }
-    });
-    dispatch({
-      type: FETCH_CANDIDATE_ERROR,
-      payload: err.response.data.errors,
-    });
-  }
-};
+      const { data } = await axios.get(
+        `/candidate?category=${category}`,
+        config
+      );
+      dispatch({
+        type: FETCH_CANDIDATE_SUCCESS,
+        payload: data.msg,
+      });
+    } catch (err) {
+      console.log(err.response);
+      err.response.data.errors.forEach((error) => {
+        if (
+          error.msg === "Not Authorized: No Token" ||
+          error.msg === "Not Authorized: Invalid User" ||
+          error.msg === "Not authorized as an admin"
+        ) {
+          dispatch(logoutUser());
+        }
+      });
+      dispatch({
+        type: FETCH_CANDIDATE_ERROR,
+        payload: err.response.data.errors,
+      });
+    }
+  };
 
 export const fetchSingleCandidate = (id) => async (dispatch, getState) => {
   try {
@@ -84,7 +89,7 @@ export const fetchSingleCandidate = (id) => async (dispatch, getState) => {
     });
   } catch (err) {
     console.log(err.response);
-    err.response.forEach((error) => {
+    err.response.data.errors.forEach((error) => {
       if (
         error.msg === "Not Authorized: No Token" ||
         error.msg === "Not Authorized: Invalid User" ||
@@ -131,7 +136,7 @@ export const createCandidate = (details) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    err.response.forEach((error) => {
+    err.response.data.errors.forEach((error) => {
       if (
         error.msg === "Not Authorized: No Token" ||
         error.msg === "Not Authorized: Invalid User" ||
@@ -172,7 +177,7 @@ export const deleteCandidate = (id) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    err.response.forEach((error) => {
+    err.response.data.errors.forEach((error) => {
       if (
         error.msg === "Not Authorized: No Token" ||
         error.msg === "Not Authorized: Invalid User" ||
@@ -219,7 +224,7 @@ export const updateCandidate = (id, details) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    err.response.forEach((error) => {
+    err.response.data.errors.forEach((error) => {
       if (
         error.msg === "Not Authorized: No Token" ||
         error.msg === "Not Authorized: Invalid User" ||
@@ -263,7 +268,7 @@ export const uploadImage = (file) => async (dispatch, getState) => {
     });
   } catch (err) {
     console.log(err.response);
-    err.response.forEach((error) => {
+    err.response.data.errors.forEach((error) => {
       if (
         error.msg === "Not Authorized: No Token" ||
         error.msg === "Not Authorized: Invalid User" ||

@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
 import {
   createCandidateReducer,
   deleteCandidateReducer,
@@ -54,6 +55,11 @@ const reducers = combineReducers({
   uploadImage: uploadImageReducer,
 });
 
-const store = createStore(reducers, initialState, applyMiddleware(thunk));
+const middlewares = [thunk];
+const store = createStore(
+  reducers,
+  initialState,
+  composeWithDevTools(applyMiddleware(...middlewares))
+);
 
 export default store;
