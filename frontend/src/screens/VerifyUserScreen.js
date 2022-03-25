@@ -20,7 +20,7 @@ const VerifyUserScreen = () => {
     } else dispatch(verifyUser(id));
   }, [userInfo, id, success, dispatch]);
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="h-screen flex justify-center">
       <Card>
         <h2 className="my-4 flex items-center justify-center text-xl">
           {loading ? (

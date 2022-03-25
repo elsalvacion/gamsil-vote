@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Card from "../components/Card";
-import { FaPlus, FaRegTrashAlt, FaUserEdit } from "react-icons/fa";
+import { FaPlus, FaRegTrashAlt, FaEdit } from "react-icons/fa";
 import Errors from "../components/Errors";
 import { deleteCategory, fetchCategory } from "../actions/categoryAction";
 import {
@@ -82,7 +82,7 @@ const CategoryScreen = () => {
                           history.push(`/edit-category/${category.id}`)
                         }
                       >
-                        <FaUserEdit fontSize={20} />
+                        <FaEdit fontSize={20} />
                       </button>
 
                       <button

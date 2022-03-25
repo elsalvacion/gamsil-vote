@@ -13,7 +13,7 @@ const NotVerifiedScreen = () => {
     }
   }, [userInfo, history]);
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="h-screen flex justify-center ">
       <Card>
         <h2 className="my-4 flex items-center justify-center text-xl">
           <span className="mr-2">No verified</span>{" "}
