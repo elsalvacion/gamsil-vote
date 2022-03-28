@@ -16,7 +16,7 @@ const LoginScreen = () => {
     });
   }, [userInfo, history, dispatch]);
   return (
-    <div className="h-screen  flex justify-center ">
+    <div className="h-full  flex justify-center ">
       <Card>
         <img
           src="/assets/gamsil.jpeg"

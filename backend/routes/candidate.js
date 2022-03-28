@@ -31,11 +31,13 @@ router.post(
         (insertCandidateErr, insertCandidateRes) => {
           if (insertCandidateErr) {
             if (insertCandidateErr.code === "ER_DUP_ENTRY")
-              res.status(400).json([
-                {
-                  msg: "Candidate already exist",
-                },
-              ]);
+              res.status(400).json({
+                errors: [
+                  {
+                    msg: "Candidate already exist",
+                  },
+                ],
+              });
             else
               res.status(400).json({
                 errors: [

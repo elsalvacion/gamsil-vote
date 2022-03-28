@@ -28,7 +28,7 @@ const AdminPanelSceen = () => {
     },
   ];
   return (
-    <div className="h-screen  flex justify-center pt-7">
+    <div className="h-full w-full  flex justify-center pt-7">
       <Card>
         <div className="flex flex-col items-center">
           {links.map((link) => (

@@ -58,6 +58,7 @@ export const logoutUser = () => (dispatch) => {
     type: USER_LOGOUT,
   });
   localStorage.removeItem("userInfo");
+  localStorage.removeItem("votes");
 };
 
 export const fetchUsers = () => async (dispatch, getState) => {

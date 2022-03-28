@@ -26,11 +26,13 @@ router.post(
         (insertCategoryErr, insertCategoryRes) => {
           if (insertCategoryErr) {
             if (insertCategoryErr.code === "ER_DUP_ENTRY")
-              res.status(400).json([
-                {
-                  msg: "Category already exist",
-                },
-              ]);
+              res.status(400).json({
+                errors: [
+                  {
+                    msg: "Category already exist",
+                  },
+                ],
+              });
             else
               res.status(400).json({
                 errors: [

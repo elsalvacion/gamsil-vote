@@ -3,7 +3,7 @@ const { body, validationResult } = require("express-validator");
 const connection = require("../config/db");
 const jwt = require("jsonwebtoken");
 const { userProtect, adminProtect } = require("../middleware/protect");
-const { sendEmail } = require("../utils/sendVerifyEmail");
+const { sendEmail } = require("../utils/sendEmails");
 
 // register user
 router.post(
@@ -31,11 +31,13 @@ router.post(
         (emailInsertError, emailInsertResults) => {
           if (emailInsertError) {
             if (emailInsertError.code === "ER_DUP_ENTRY")
-              res.status(400).json([
-                {
-                  msg: "User already exist",
-                },
-              ]);
+              res.status(400).json({
+                errors: [
+                  {
+                    msg: "User already exist",
+                  },
+                ],
+              });
             else
               res.status(400).json({
                 errors: [
@@ -45,8 +47,7 @@ router.post(
                 ],
               });
           } else {
-            sendEmail(req.body.email);
-            res.status(200).json({ msg: "User created" });
+            sendEmail(req.body.email, res);
           }
         }
       );
