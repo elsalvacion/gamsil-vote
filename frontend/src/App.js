@@ -15,6 +15,7 @@ import StartOStopVoteScreen from "./screens/StartOStopVoteScreen";
 import UserScreen from "./screens/UserScreen";
 import VerifyUserScreen from "./screens/VerifyUserScreen";
 import VotedScreen from "./screens/VotedScreen";
+import VotingNotOpenScreen from "./screens/VotingNotOpenScreen";
 
 const App = () => {
   return (
@@ -41,6 +42,11 @@ const App = () => {
             component={StartOStopVoteScreen}
           />
           <Route exact path="/voted" component={VotedScreen} />
+          <Route
+            exact
+            path="/voting-not-opened"
+            component={VotingNotOpenScreen}
+          />
           <Route exact path="/user" component={UserScreen} />
           <Route exact path="/edit-user/:id" component={EditUserScreen} />
           <Route exact path="/create-user" component={CreateUserScreen} />

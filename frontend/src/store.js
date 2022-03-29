@@ -25,7 +25,12 @@ import {
   userLoginReducer,
   verifyUserReducer,
 } from "./reducers/userReducer";
-import { releaseResultReducer, sendVoteReducer } from "./reducers/voteReducer";
+import {
+  getStartOStopReducer,
+  releaseResultReducer,
+  sendVoteReducer,
+  startOStopReducer,
+} from "./reducers/voteReducer";
 
 const initialState = {
   userLogin: {
@@ -56,6 +61,8 @@ const reducers = combineReducers({
   uploadImage: uploadImageReducer,
   sendVote: sendVoteReducer,
   releaseResults: releaseResultReducer,
+  startOStop: startOStopReducer,
+  getStartOStop: getStartOStopReducer,
 });
 
 const middlewares = [thunk];

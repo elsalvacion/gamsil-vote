@@ -104,4 +104,71 @@ router.get("/release", userProtect, adminProtect, (req, res) => {
   }
 });
 
+// start/stop voting
+router.put("/start-o-stop", userProtect, adminProtect, (req, res) => {
+  try {
+    const { isOpen } = req.body;
+
+    connection.query(
+      `
+        update voting set isOpen = ?;
+        `,
+      [isOpen],
+      (startVoteError, startVoteRes) => {
+        if (startVoteError) {
+          res.status(400).json({
+            errors: [
+              {
+                msg: "Could not start/stop vote",
+              },
+            ],
+          });
+        } else {
+          res.json({ msg: "start/stop successful" });
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      errors: [
+        {
+          msg: "start/stop voting errors",
+        },
+      ],
+    });
+  }
+});
+
+// get start-o-stop
+router.get("/start-o-stop", userProtect, adminProtect, (req, res) => {
+  try {
+    connection.query(
+      `select * from voting;
+        `,
+      (startVoteError, startVoteRes) => {
+        if (startVoteError) {
+          res.status(400).json({
+            errors: [
+              {
+                msg: "Could not get start/stop vote",
+              },
+            ],
+          });
+        } else {
+          res.json({ msg: startVoteRes[0].isOpen });
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      errors: [
+        {
+          msg: "start/stop fetch voting errors",
+        },
+      ],
+    });
+  }
+});
 module.exports = router;

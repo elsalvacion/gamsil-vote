@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { fetchCategory } from "../actions/categoryAction";
-import { sendVotes } from "../actions/voteAction";
+import { getStartOStopElection, sendVotes } from "../actions/voteAction";
 import VoteCategory from "../components/VoteCategory";
 import Errors from "../components/Errors";
 import Card from "../components/Card";
@@ -20,6 +20,12 @@ const HomeScreen = () => {
     success: votingSuccess,
     errors: votingErrors,
   } = useSelector((state) => state.sendVote);
+  const {
+    loading: getStartOStopLoading,
+    isOpen,
+    success: getStartOStopSuccess,
+    errors: getStartOStopErrors,
+  } = useSelector((state) => state.getStartOStop);
   const dispatch = useDispatch();
   useEffect(() => {
     if (!userInfo) history.push("/");
@@ -36,7 +42,23 @@ const HomeScreen = () => {
       });
       history.push("/voted");
     }
-  }, [userInfo, history, categories, dispatch, votingSuccess]);
+
+    if (getStartOStopSuccess) {
+      if (isOpen === 0) {
+        history.push("/voting-not-opened");
+      }
+    } else {
+      dispatch(getStartOStopElection());
+    }
+  }, [
+    userInfo,
+    history,
+    categories,
+    dispatch,
+    votingSuccess,
+    getStartOStopSuccess,
+    isOpen,
+  ]);
 
   const handleVote = () => {
     const isVotes = localStorage.getItem("votes")
@@ -56,6 +78,7 @@ const HomeScreen = () => {
         opacity: votingLoading ? 0.5 : 1,
       }}
     >
+      {getStartOStopLoading && <Loading text="Checking if voting is open" />}
       {votingLoading && (
         <Loading text="We will be done soon. Sending vote ...." />
       )}
@@ -64,8 +87,13 @@ const HomeScreen = () => {
           <Errors errors={votingErrors} />
         </Card>
       )}
+      {getStartOStopErrors && (
+        <Card>
+          <Errors errors={getStartOStopErrors} />
+        </Card>
+      )}
       {categoryLoading ? (
-        <h2>Loading ...</h2>
+        <Loading text="Fetching vote categories" />
       ) : (
         categories &&
         categories.map((category) => (

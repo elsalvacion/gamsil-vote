@@ -85,15 +85,16 @@ export const fetchUsers = () => async (dispatch, getState) => {
     });
   } catch (err) {
     console.log(err.response);
-    err.response.data.errors.forEach((error) => {
-      if (
-        error.msg === "Not Authorized: No Token" ||
-        error.msg === "Not Authorized: Invalid User" ||
-        error.msg === "Not authorized as an admin"
-      ) {
-        dispatch(logoutUser());
-      }
-    });
+    if (err.response.data.errors)
+      err.response.data.errors.forEach((error) => {
+        if (
+          error.msg === "Not Authorized: No Token" ||
+          error.msg === "Not Authorized: Invalid User" ||
+          error.msg === "Not authorized as an admin"
+        ) {
+          dispatch(logoutUser());
+        }
+      });
     dispatch({
       type: FETCH_USERS_ERROR,
       payload: err.response.data.errors,
@@ -125,15 +126,16 @@ export const fetchSingleUser = (id) => async (dispatch, getState) => {
     });
   } catch (err) {
     console.log(err.response);
-    err.response.data.errors.forEach((error) => {
-      if (
-        error.msg === "Not Authorized: No Token" ||
-        error.msg === "Not Authorized: Invalid User" ||
-        error.msg === "Not authorized as an admin"
-      ) {
-        dispatch(logoutUser());
-      }
-    });
+    if (err.response.data.errors)
+      err.response.data.errors.forEach((error) => {
+        if (
+          error.msg === "Not Authorized: No Token" ||
+          error.msg === "Not Authorized: Invalid User" ||
+          error.msg === "Not authorized as an admin"
+        ) {
+          dispatch(logoutUser());
+        }
+      });
     dispatch({
       type: FETCH_SINGLE_USER_ERROR,
       payload: err.response.data.errors,
@@ -172,15 +174,16 @@ export const registerUser = (email) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    err.response.data.errors.forEach((error) => {
-      if (
-        error.msg === "Not Authorized: No Token" ||
-        error.msg === "Not Authorized: Invalid User" ||
-        error.msg === "Not authorized as an admin"
-      ) {
-        dispatch(logoutUser());
-      }
-    });
+    if (err.response.data.errors)
+      err.response.data.errors.forEach((error) => {
+        if (
+          error.msg === "Not Authorized: No Token" ||
+          error.msg === "Not Authorized: Invalid User" ||
+          error.msg === "Not authorized as an admin"
+        ) {
+          dispatch(logoutUser());
+        }
+      });
     dispatch({
       type: REGISTER_USER_ERROR,
       payload: err.response.data.errors,
@@ -213,15 +216,16 @@ export const deleteUser = (id) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    err.response.data.errors.forEach((error) => {
-      if (
-        error.msg === "Not Authorized: No Token" ||
-        error.msg === "Not Authorized: Invalid User" ||
-        error.msg === "Not authorized as an admin"
-      ) {
-        dispatch(logoutUser());
-      }
-    });
+    if (err.response.data.errors)
+      err.response.data.errors.forEach((error) => {
+        if (
+          error.msg === "Not Authorized: No Token" ||
+          error.msg === "Not Authorized: Invalid User" ||
+          error.msg === "Not authorized as an admin"
+        ) {
+          dispatch(logoutUser());
+        }
+      });
     dispatch({
       type: DELETE_USER_ERROR,
       payload: err.response.data.errors,
@@ -260,15 +264,16 @@ export const updateUser = (id, details) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    err.response.data.errors.forEach((error) => {
-      if (
-        error.msg === "Not Authorized: No Token" ||
-        error.msg === "Not Authorized: Invalid User" ||
-        error.msg === "Not authorized as an admin"
-      ) {
-        dispatch(logoutUser());
-      }
-    });
+    if (err.response.data.errors)
+      err.response.data.errors.forEach((error) => {
+        if (
+          error.msg === "Not Authorized: No Token" ||
+          error.msg === "Not Authorized: Invalid User" ||
+          error.msg === "Not authorized as an admin"
+        ) {
+          dispatch(logoutUser());
+        }
+      });
     dispatch({
       type: UPDATE_USER_ERROR,
       payload: err.response.data.errors,
