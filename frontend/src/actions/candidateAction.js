@@ -83,7 +83,7 @@ export const fetchSingleCandidate = (id) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(`/candidate/${id}`, config);
-    console.log(data);
+
     dispatch({
       type: FETCH_SINGLE_CANDIDATE_SUCCESS,
       payload: data.msg,

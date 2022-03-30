@@ -1,7 +1,7 @@
 const connection = require("../config/db");
 const { userProtect, adminProtect } = require("../middleware/protect");
 const { body, validationResult } = require("express-validator");
-const { sendVotes } = require("../utils/sendEmails");
+const { sendVotes, sendStartVotes } = require("../utils/sendEmails");
 const router = require("express").Router();
 
 // vote
@@ -124,7 +124,32 @@ router.put("/start-o-stop", userProtect, adminProtect, (req, res) => {
             ],
           });
         } else {
-          res.json({ msg: "start/stop successful" });
+          if (isOpen === 1) {
+            connection.query(
+              `
+            select * from users;
+            `,
+              (getUsersErr, getUsersRes) => {
+                if (getUsersErr) {
+                  res.status(400).json({
+                    errors: [
+                      {
+                        msg: "Could not get voters",
+                      },
+                    ],
+                  });
+                } else {
+                  const users = [];
+                  getUsersRes.forEach((user) => {
+                    users.push(user.email);
+                  });
+                  sendStartVotes(users, res);
+                }
+              }
+            );
+          } else {
+            res.json({ msg: "start/stop successful" });
+          }
         }
       }
     );

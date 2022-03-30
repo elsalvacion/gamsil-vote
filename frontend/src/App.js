@@ -6,6 +6,7 @@ import CategoryScreen from "./screens/CategoryScreen";
 import CreateCandidateScreen from "./screens/CreateCandidateScreen";
 import CreateCategoryScreen from "./screens/CreateCategoryScreen";
 import CreateUserScreen from "./screens/CreateUserScreen";
+import EditCandidateScreen from "./screens/EditCandidateScreen";
 import EditCategoryScreen from "./screens/EditCategoryScreen";
 import EditUserScreen from "./screens/EditUserScreen";
 import HomeScreen from "./screens/HomeScreen";
@@ -35,6 +36,11 @@ const App = () => {
             exact
             path="/create-candidate"
             component={CreateCandidateScreen}
+          />
+          <Route
+            exact
+            path="/edit-candidate/:id"
+            component={EditCandidateScreen}
           />
           <Route
             exact

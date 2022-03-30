@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 import Card from "../components/Card";
 import { FaPlus, FaRegTrashAlt, FaEdit } from "react-icons/fa";
 import Errors from "../components/Errors";
+import Loading from "../components/Loading";
+
 import { deleteCandidate, fetchCandidate } from "../actions/candidateAction";
 import {
   CREATE_CANDIDATE_RESET,
@@ -26,6 +28,7 @@ const CandidateScreen = () => {
     success: deleteSuccess,
     errors: deleteErrors,
   } = useSelector((state) => state.deleteCandidate);
+
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(() => {
@@ -35,20 +38,19 @@ const CandidateScreen = () => {
         dispatch({
           type: DELETE_CANDIDATE_RESET,
         });
-
-      dispatch({
-        type: UPDATE_CANDIDATE_RESET,
-      });
       dispatch({
         type: FETCH_SINGLE_CANDIDATE_RESET,
       });
 
-      if (createSuccess) {
+      if (createSuccess || editSuccess) {
         dispatch({
           type: CREATE_CANDIDATE_RESET,
         });
         dispatch({
           type: UPLOAD_IMAGE_RESET,
+        });
+        dispatch({
+          type: UPDATE_CANDIDATE_RESET,
         });
       }
       dispatch(fetchCandidate());
@@ -66,7 +68,6 @@ const CandidateScreen = () => {
         {/* header */}
         <div className="py-3 flex justify-between">
           <h2 className="font-bold">Candidates</h2>
-          <h2 className="font-bold">For</h2>
           <button
             onClick={() => history.push("/create-candidate")}
             className="px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded"
@@ -76,43 +77,65 @@ const CandidateScreen = () => {
         </div>
 
         {loading || deleteLoading ? (
-          <h2 className="my-2">{loading ? "Loading ..." : "Deleting ..."}</h2>
+          loading ? (
+            <Loading text="Fetch candidates ..." />
+          ) : (
+            <Loading text="Deleting ..." />
+          )
         ) : errors || deleteErrors ? (
           <Errors errors={errors || deleteErrors} />
         ) : (
           <div className="mt-4">
-            {candidates && candidates.length > 0 ? (
-              <>
-                {candidates.map((candidate) => (
-                  <div
-                    key={candidate.id}
-                    className="flex justify-between flex-wrap mb-3"
-                  >
-                    <p className="mb-1">{candidate.name}</p>
-                    <p className="mb-1">{candidate.category}</p>
-                    <div>
-                      <button
-                        className="mx-2"
-                        onClick={() =>
-                          history.push(`/edit-category/${candidate.id}`)
-                        }
-                      >
-                        <FaEdit fontSize={20} />
-                      </button>
+            <table className="table-auto w-full border-collapse border border-gray-400">
+              <thead>
+                <tr className="mb-3">
+                  <th className="text-left border-collapse border border-gray-400 p-2">
+                    Name
+                  </th>
+                  <th className="text-left border-collapse border border-gray-400 p-2">
+                    Category
+                  </th>
+                  <th className="text-left border-collapse border border-gray-400"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {candidates && candidates.length > 0 ? (
+                  <>
+                    {candidates.map((candidate) => (
+                      <tr key={candidate.id}>
+                        <td className="my-3 border-collapse border border-gray-400 p-2">
+                          {candidate.name}
+                        </td>
+                        <td className="my-3 border-collapse border border-gray-400 p-2">
+                          {candidate.category}
+                        </td>
+                        <td className="flex p-2 items-center my-3">
+                          <button
+                            className="mx-2"
+                            onClick={() =>
+                              history.push(`/edit-candidate/${candidate.id}`)
+                            }
+                          >
+                            <FaEdit fontSize={20} />
+                          </button>
 
-                      <button
-                        className="text-red-500 mx-2"
-                        onClick={() => handleCandidateDelete(candidate.id)}
-                      >
-                        <FaRegTrashAlt fontSize={20} />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </>
-            ) : (
-              <h2>No candidate found</h2>
-            )}
+                          <button
+                            className="text-red-500 mx-2"
+                            onClick={() => handleCandidateDelete(candidate.id)}
+                          >
+                            <FaRegTrashAlt fontSize={20} />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </>
+                ) : (
+                  <tr>
+                    <h2>No candidate found</h2>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
         )}
       </Card>

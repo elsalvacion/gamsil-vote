@@ -54,7 +54,7 @@ export const fetchSingleCandidateReducer = (state = {}, action) => {
       };
     case FETCH_SINGLE_CANDIDATE_SUCCESS:
       return {
-        Candidate: action.payload,
+        candidate: action.payload,
       };
     case FETCH_SINGLE_CANDIDATE_ERROR:
       return {

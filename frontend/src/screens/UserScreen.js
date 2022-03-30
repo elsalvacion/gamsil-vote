@@ -65,35 +65,52 @@ const UserScreen = () => {
           <Errors errors={errors || deleteErrors} />
         ) : (
           <div className="mt-4">
-            {users && users.length > 0 ? (
-              <>
-                {users.map((user) => (
-                  <div
-                    key={user.id}
-                    className="flex justify-between flex-wrap mb-3"
-                  >
-                    <p className="mb-1">{user.email}</p>
-                    <div>
-                      <button
-                        className="mx-2"
-                        onClick={() => history.push(`/edit-user/${user.id}`)}
-                      >
-                        <FaUserEdit fontSize={20} />
-                      </button>
+            <table className="table-auto w-full border-collapse border border-gray-400">
+              <thead>
+                <tr className="mb-3">
+                  <th className="text-left border-collapse border border-gray-400 p-2">
+                    Email
+                  </th>
 
-                      <button
-                        className="text-red-500 mx-2"
-                        onClick={() => handleUserDelete(user.id)}
-                      >
-                        <FaRegTrashAlt fontSize={20} />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </>
-            ) : (
-              <h2>No registered voters</h2>
-            )}
+                  <th className="text-left border-collapse border border-gray-400"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {users && users.length > 0 ? (
+                  <>
+                    {users.map((user) => (
+                      <tr key={user.id}>
+                        <td className="my-3 border-collapse border border-gray-400 p-2">
+                          {user.email}
+                        </td>
+
+                        <td className="flex p-2 items-center my-3">
+                          <button
+                            className="mx-2"
+                            onClick={() =>
+                              history.push(`/edit-user/${user.id}`)
+                            }
+                          >
+                            <FaUserEdit fontSize={20} />
+                          </button>
+
+                          <button
+                            className="text-red-500 mx-2"
+                            onClick={() => handleUserDelete(user.id)}
+                          >
+                            <FaRegTrashAlt fontSize={20} />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </>
+                ) : (
+                  <tr>
+                    <h2>No user found</h2>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
         )}
       </Card>

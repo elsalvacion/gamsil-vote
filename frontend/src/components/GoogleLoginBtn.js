@@ -19,9 +19,8 @@ const GoogleLoginBtn = () => {
         disabled={loading}
       />
       <p className="py-3 text-blue-500 text-sm">
-        * If you are not registered you cannot login either. Contact admin at
-        alieukeita@iut-dhaka.edu or +8801858328387(whatsapp) so that you can be
-        registered.
+        * If you are not registered you cannot login either. Contact admin so
+        that you can be registered.
       </p>
     </>
   );

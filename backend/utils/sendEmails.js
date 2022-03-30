@@ -100,4 +100,41 @@ const sendVotes = async (users, winners, res) => {
   }
 };
 
-module.exports = { sendEmail, sendVotes };
+// send start election
+const sendStartVotes = async (users, res) => {
+  try {
+    const mailOptions = {
+      from: `Gamsil Vote <${process.env.EMAIL}>`,
+      to: users,
+      subject: "Gamsil election has started",
+      html: `
+      <div style="
+        background: white;
+        padding: 10px;
+        ">
+        <p>The Gamsil management invites you to participate in this election voting to select your upcoming elections.</p>
+
+       <p style="font-size: 18px;"><b>Click the link or gif below to start voting:</b> </p>
+       <a style="font-size: 18px;" href="${`http://localhost:3000/`}">start voting</a>
+      </div>
+      <div >
+      <a style="width: 100%;" href="${`http://localhost:3000/`}">
+      <img src="https://media.giphy.com/media/3oriNT3HeCc7vDwupG/giphy.gif" width="100%" />
+      </a>
+      </div>
+      `,
+    };
+    await transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+        res.json({ msg: "start/stop successful" });
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = { sendEmail, sendVotes, sendStartVotes };

@@ -65,7 +65,15 @@ const StartOStopVoteScreen = () => {
         {releaseLoading && <Loading text="Sending... election results" />}
         {startElectionLoading && <Loading text="Processing..." />}
         {getStartOStopLoading && (
-          <Loading text="Checking if election is started" />
+          <Loading
+            text={
+              getStartOStopSuccess
+                ? isOpen === 0
+                  ? "Starting election & sending out email"
+                  : "Stoping election"
+                : "Checking if election is started"
+            }
+          />
         )}
         {getStartOStopErrors && <Errors errors={getStartOStopErrors} />}
         {startElectionErrors && <Errors errors={startElectionErrors} />}
