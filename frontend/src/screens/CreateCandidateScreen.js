@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 
 import { createCandidate, uploadImage } from "../actions/candidateAction";
 import { fetchCategory } from "../actions/categoryAction";
+import Loading from "../components/Loading";
 
 const CreateCandidateScreen = () => {
   const dispatch = useDispatch();
@@ -94,7 +95,9 @@ const CreateCandidateScreen = () => {
         {formErrors.length > 0 && <Errors errors={formErrors} />}
         {errors && <Errors errors={errors} />}
         {uploadingErrors && <Errors errors={uploadingErrors} />}
-        {uploading && <h2 className="my-2 font-semibold">Uploading ...</h2>}
+        {uploading && <Loading text="Uploading ..." />}
+        {loading && <Loading text="Adding new candidate ..." />}
+
         {!imageUploaded ? (
           <>
             <input
@@ -102,7 +105,7 @@ const CreateCandidateScreen = () => {
               name="file"
               accept="image/*"
               className="border-2 block w-full py-2 rounded px-2 mb-2"
-              disabled={uploading || imageUploaded}
+              disabled={imageUploaded}
               onChange={(e) =>
                 setValues({ ...values, image: e.target.files[0] })
               }
@@ -140,7 +143,7 @@ const CreateCandidateScreen = () => {
             value={values.name}
             onChange={handleChange}
             required
-            disabled={uploading || !imageUploaded}
+            disabled={!imageUploaded}
           />
           <label htmlFor="category" className="block">
             Category
@@ -150,7 +153,7 @@ const CreateCandidateScreen = () => {
             id="category"
             onChange={handleChange}
             className="border-2 block w-full py-2 rounded px-2 mb-5 bg-transparent"
-            disabled={uploading || !imageUploaded}
+            disabled={!imageUploaded}
             value={values.category}
           >
             <>
@@ -178,7 +181,7 @@ const CreateCandidateScreen = () => {
           <button
             type="submit"
             className="bg-white border-2 px-3 py-1 text-black rounded flex items-center text-center"
-            disabled={loading || uploading || !imageUploaded}
+            disabled={!imageUploaded}
           >
             <span className="mr-3">SUBMIT</span>
             {loading && <Spinner />}

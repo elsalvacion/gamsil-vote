@@ -41,12 +41,13 @@ export const sendVotes = (votes) => async (dispatch, getState) => {
     );
 
     if (data) {
-      userInfo.voted = 1;
-      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      const newInfo = userInfo;
+      newInfo.voted = 1;
+      localStorage.setItem("userInfo", JSON.stringify(newInfo));
 
       dispatch({
         type: USER_LOGIN_SUCCESS,
-        payload: userInfo,
+        payload: newInfo,
       });
       dispatch({
         type: SEND_VOTE_SUCCESS,
@@ -54,7 +55,7 @@ export const sendVotes = (votes) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    if (err.response.data.errors)
+    if (err.response.data && err.response.data.errors)
       err.response.data.errors.forEach((error) => {
         if (
           error.msg === "Not Authorized: No Token" ||
@@ -96,7 +97,7 @@ export const releaseElectionResults = () => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    if (err.response.data.errors)
+    if (err.response.data && err.response.data.errors)
       err.response.data.errors.forEach((error) => {
         if (
           error.msg === "Not Authorized: No Token" ||
@@ -145,7 +146,7 @@ export const startOStopElection = (isOpen) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    if (err.response.data.errors)
+    if (err.response.data && err.response.data.errors)
       err.response.data.errors.forEach((error) => {
         if (
           error.msg === "Not Authorized: No Token" ||
@@ -188,7 +189,7 @@ export const getStartOStopElection = () => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    if (err.response.data.errors)
+    if (err.response.data && err.response.data.errors)
       err.response.data.errors.forEach((error) => {
         if (
           error.msg === "Not Authorized: No Token" ||

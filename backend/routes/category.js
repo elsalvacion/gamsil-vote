@@ -59,7 +59,7 @@ router.post(
   }
 );
 // get all category
-router.get("/", userProtect, adminProtect, (req, res) => {
+router.get("/", userProtect, (req, res) => {
   try {
     connection.query(
       `select * from category order by id desc`,
@@ -89,7 +89,7 @@ router.get("/", userProtect, adminProtect, (req, res) => {
   }
 });
 // get category
-router.get("/:id", userProtect, adminProtect, (req, res) => {
+router.get("/:id", userProtect, (req, res) => {
   try {
     connection.query(
       `select * from category where id = ?`,

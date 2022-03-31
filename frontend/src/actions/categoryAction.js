@@ -42,7 +42,7 @@ export const fetchCategory = () => async (dispatch, getState) => {
     });
   } catch (err) {
     console.log(err.response);
-    if (err.response.data.errors)
+    if (err.response.data && err.response.data.errors)
       err.response.data.errors.forEach((error) => {
         if (
           error.msg === "Not Authorized: No Token" ||
@@ -83,7 +83,7 @@ export const fetchSingleCategory = (id) => async (dispatch, getState) => {
     });
   } catch (err) {
     console.log(err.response);
-    if (err.response.data.errors)
+    if (err.response.data && err.response.data.errors)
       err.response.data.errors.forEach((error) => {
         if (
           error.msg === "Not Authorized: No Token" ||
@@ -131,7 +131,7 @@ export const createCategory = (title) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    if (err.response.data.errors)
+    if (err.response.data && err.response.data.errors)
       err.response.data.errors.forEach((error) => {
         if (
           error.msg === "Not Authorized: No Token" ||
@@ -173,7 +173,7 @@ export const deleteCategory = (id) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    if (err.response.data.errors)
+    if (err.response.data && err.response.data.errors)
       err.response.data.errors.forEach((error) => {
         if (
           error.msg === "Not Authorized: No Token" ||
@@ -221,7 +221,7 @@ export const updateCategory = (id, details) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    if (err.response.data.errors)
+    if (err.response.data && err.response.data.errors)
       err.response.data.errors.forEach((error) => {
         if (
           error.msg === "Not Authorized: No Token" ||

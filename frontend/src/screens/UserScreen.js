@@ -10,6 +10,7 @@ import {
   FETCH_SINGLE_USER_RESET,
   UPDATE_USER_RESET,
 } from "../reducers/types/userTypes";
+import Loading from "../components/Loading";
 const UserScreen = () => {
   const { userInfo } = useSelector((state) => state.userLogin);
   const { loading, users, errors } = useSelector((state) => state.fetchUser);
@@ -60,7 +61,11 @@ const UserScreen = () => {
         </div>
 
         {loading || deleteLoading ? (
-          <h2 className="my-2">{loading ? "Loading ..." : "Deleting ..."}</h2>
+          loading ? (
+            <Loading text="Fetch users ..." />
+          ) : (
+            <Loading text="Deleting ..." />
+          )
         ) : errors || deleteErrors ? (
           <Errors errors={errors || deleteErrors} />
         ) : (

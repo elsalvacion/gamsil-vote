@@ -66,7 +66,7 @@ const HomeScreen = () => {
       : [];
 
     if (isVotes.length !== categories.length) {
-      alert("Hey you cannot beat the system");
+      alert("Hey you cannot beat the system. Vote in all categories.");
     } else if (window.confirm("Are you sure about your choices?")) {
       dispatch(sendVotes(isVotes));
     }
@@ -103,6 +103,15 @@ const HomeScreen = () => {
       <button
         onClick={handleVote}
         className="border-2 py-2 rounded text-center text-lg block w-1/2 m-3 mx-auto bg-blue-500 text-white hover:bg-blue-700 mb-5"
+        // disabled={
+        //   localStorage.getItem("votes")
+        //     ? categories &&
+        //       Array.from(JSON.parse(localStorage.getItem("votes"))).length ===
+        //         categories.length
+        //       ? false
+        //       : true
+        //     : true
+        // }
       >
         VOTE
       </button>

@@ -6,6 +6,7 @@ import Spinner from "../components/Spinner";
 import { useHistory } from "react-router-dom";
 import { CREATE_CATEGORY_RESET } from "../reducers/types/categoryTypes";
 import { createCategory } from "../actions/categoryAction";
+import Loading from "../components/Loading";
 const CreateCategoryScreen = () => {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.userLogin);
@@ -51,6 +52,7 @@ const CreateCategoryScreen = () => {
 
         {formErrors.length > 0 && <Errors errors={formErrors} />}
         {errors && <Errors errors={errors} />}
+        {loading && <Loading text="Adding new category ..." />}
         <form onSubmit={handleSubmit}>
           <label htmlFor="title" className="block">
             Enter title
@@ -68,8 +70,7 @@ const CreateCategoryScreen = () => {
 
           <button
             type="submit"
-            className="bg-white border-2 block px-3 py-1 text-black rounded flex items-center text-center"
-            disabled={loading}
+            className="bg-white border-2  px-3 py-1 text-black rounded flex items-center text-center"
           >
             <span className="mr-3">SUBMIT</span>
             {loading && <Spinner />}

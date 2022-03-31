@@ -17,22 +17,25 @@ router.post(
       if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
       }
-      votes.forEach((vote) => {
+      votes.forEach((vote, i) => {
         connection.query(
           `
-        update candidate set votes = votes + 1 where id = ?;
+        update candidate set votes = votes + 1 where id = ? and category = ?;
         update users set voted = 1 where id = ? ;  
         `,
-          [vote.candidate, req.user.id],
+          [vote.candidate, vote.category, req.user.id],
           (voteError, voteRes) => {
             if (voteError) {
-              res.status(400).json([
+              console.log(voteError);
+              return res.status(400).json([
                 {
                   msg: "Could not update votes",
                 },
               ]);
             } else {
-              res.json({ msg: "Vote successful" });
+              if (i === votes.length - 1) {
+                res.status(200).json({ msg: "Vote successful" });
+              }
             }
           }
         );
@@ -59,7 +62,7 @@ router.get("/release", userProtect, adminProtect, (req, res) => {
     `,
       (getUsersErr, getUsersRes) => {
         if (getUsersErr) {
-          res.status(400).json({
+          return res.status(400).json({
             errors: [
               {
                 msg: "Could not get voters",
@@ -77,7 +80,7 @@ router.get("/release", userProtect, adminProtect, (req, res) => {
             (votesErr, votesRes) => {
               if (votesErr) {
                 console.log(votesErr);
-                res.status(400).json({
+                return res.status(400).json({
                   errors: [
                     {
                       msg: "Could not get votes",
@@ -116,7 +119,7 @@ router.put("/start-o-stop", userProtect, adminProtect, (req, res) => {
       [isOpen],
       (startVoteError, startVoteRes) => {
         if (startVoteError) {
-          res.status(400).json({
+          return res.status(400).json({
             errors: [
               {
                 msg: "Could not start/stop vote",
@@ -131,7 +134,7 @@ router.put("/start-o-stop", userProtect, adminProtect, (req, res) => {
             `,
               (getUsersErr, getUsersRes) => {
                 if (getUsersErr) {
-                  res.status(400).json({
+                  return res.status(400).json({
                     errors: [
                       {
                         msg: "Could not get voters",
@@ -166,14 +169,14 @@ router.put("/start-o-stop", userProtect, adminProtect, (req, res) => {
 });
 
 // get start-o-stop
-router.get("/start-o-stop", userProtect, adminProtect, (req, res) => {
+router.get("/start-o-stop", userProtect, (req, res) => {
   try {
     connection.query(
       `select * from voting;
         `,
       (startVoteError, startVoteRes) => {
         if (startVoteError) {
-          res.status(400).json({
+          return res.status(400).json({
             errors: [
               {
                 msg: "Could not get start/stop vote",

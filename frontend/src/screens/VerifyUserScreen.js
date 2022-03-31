@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { logoutUser, verifyUser } from "../actions/userAction";
 import Errors from "../components/Errors";
+import Loading from "../components/Loading";
 const VerifyUserScreen = () => {
   const { userInfo } = useSelector((state) => state.userLogin);
   const { loading, errors, success } = useSelector((state) => state.verifyUser);
@@ -22,14 +23,9 @@ const VerifyUserScreen = () => {
   return (
     <div className="h-screen flex justify-center">
       <Card>
+        {loading && <Loading text="Verifying..." />}
         <h2 className="my-4 flex items-center justify-center text-xl">
-          {loading ? (
-            <>
-              {" "}
-              <span className="mr-2">Verifying ...</span>
-              <GoUnverified className="text-blue-700" />
-            </>
-          ) : success ? (
+          {success ? (
             <>
               <span className="mr-2">Account Verfied</span>
               <GoVerified className="text-green-700" />

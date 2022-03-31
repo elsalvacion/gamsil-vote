@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../actions/userAction";
 import store from "../store";
+
 const VoteCategory = ({ category }) => {
   const [loading, setLoading] = useState(false);
   const [candidates, setCandidates] = useState(null);
@@ -33,15 +34,16 @@ const VoteCategory = ({ category }) => {
         setLoading(false);
       } catch (err) {
         console.log(err.response);
-        err.response.data.errors.forEach((error) => {
-          if (
-            error.msg === "Not Authorized: No Token" ||
-            error.msg === "Not Authorized: Invalid User" ||
-            error.msg === "Not authorized as an admin"
-          ) {
-            dispatch(logoutUser());
-          }
-        });
+        if (err.response.data && err.response.data.errors)
+          err.response.data.errors.forEach((error) => {
+            if (
+              error.msg === "Not Authorized: No Token" ||
+              error.msg === "Not Authorized: Invalid User" ||
+              error.msg === "Not authorized as an admin"
+            ) {
+              dispatch(logoutUser());
+            }
+          });
 
         setLoading(false);
       }

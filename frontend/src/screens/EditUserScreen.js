@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleUser, updateUser } from "../actions/userAction";
 import Spinner from "../components/Spinner";
 import { useHistory, useParams } from "react-router-dom";
+import Loading from "../components/Loading";
 const EditUserScreen = () => {
   const dispatch = useDispatch();
 
@@ -61,7 +62,7 @@ const EditUserScreen = () => {
         {formErrors.length > 0 && <Errors errors={formErrors} />}
         {errors && <Errors errors={errors} />}
         {fetchUserErrors && <Errors errors={fetchUserErrors} />}
-
+        {loading && <Loading text="Updating user" />}
         <form onSubmit={handleSubmit}>
           <label htmlFor="email" className="block">
             Edit email
@@ -93,7 +94,6 @@ const EditUserScreen = () => {
           <button
             type="submit"
             className="bg-white border-2 block px-3 py-1 text-black rounded flex items-center text-center"
-            disabled={loading}
           >
             <span className="mr-3">SUBMIT</span>
             {loading && <Spinner />}

@@ -49,7 +49,7 @@ export const fetchCandidate =
       });
     } catch (err) {
       console.log(err.response);
-      if (err.response.data.errors)
+      if (err.response.data && err.response.data.errors)
         err.response.data.errors.forEach((error) => {
           if (
             error.msg === "Not Authorized: No Token" ||
@@ -90,7 +90,7 @@ export const fetchSingleCandidate = (id) => async (dispatch, getState) => {
     });
   } catch (err) {
     console.log(err.response);
-    if (err.response.data.errors)
+    if (err.response.data && err.response.data.errors)
       err.response.data.errors.forEach((error) => {
         if (
           error.msg === "Not Authorized: No Token" ||
@@ -138,7 +138,7 @@ export const createCandidate = (details) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    if (err.response.data.errors)
+    if (err.response.data && err.response.data.errors)
       err.response.data.errors.forEach((error) => {
         if (
           error.msg === "Not Authorized: No Token" ||
@@ -180,7 +180,7 @@ export const deleteCandidate = (id) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    if (err.response.data.errors)
+    if (err.response.data && err.response.data.errors)
       err.response.data.errors.forEach((error) => {
         if (
           error.msg === "Not Authorized: No Token" ||
@@ -228,7 +228,7 @@ export const updateCandidate = (id, details) => async (dispatch, getState) => {
     }
   } catch (err) {
     console.log(err.response);
-    if (err.response.data.errors)
+    if (err.response.data && err.response.data.errors)
       err.response.data.errors.forEach((error) => {
         if (
           error.msg === "Not Authorized: No Token" ||
@@ -273,7 +273,7 @@ export const uploadImage = (file) => async (dispatch, getState) => {
     });
   } catch (err) {
     console.log(err.response);
-    if (err.response.data.errors)
+    if (err.response.data && err.response.data.errors)
       err.response.data.errors.forEach((error) => {
         if (
           error.msg === "Not Authorized: No Token" ||

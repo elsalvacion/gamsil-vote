@@ -10,6 +10,7 @@ import {
   FETCH_SINGLE_CATEGORY_RESET,
   UPDATE_CATEGORY_RESET,
 } from "../reducers/types/categoryTypes";
+import Loading from "../components/Loading";
 const CategoryScreen = () => {
   const { userInfo } = useSelector((state) => state.userLogin);
   const { loading, categories, errors } = useSelector(
@@ -62,7 +63,11 @@ const CategoryScreen = () => {
         </div>
 
         {loading || deleteLoading ? (
-          <h2 className="my-2">{loading ? "Loading ..." : "Deleting ..."}</h2>
+          loading ? (
+            <Loading text="Fetch categories ..." />
+          ) : (
+            <Loading text="Deleting ..." />
+          )
         ) : errors || deleteErrors ? (
           <Errors errors={errors || deleteErrors} />
         ) : (

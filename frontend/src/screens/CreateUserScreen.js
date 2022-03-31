@@ -6,6 +6,7 @@ import { registerUser } from "../actions/userAction";
 import Spinner from "../components/Spinner";
 import { useHistory } from "react-router-dom";
 import { REGISTER_USER_RESET } from "../reducers/types/userTypes";
+import Loading from "../components/Loading";
 const CreateUserScreen = () => {
   const dispatch = useDispatch();
   const { loading, errors, success } = useSelector(
@@ -59,6 +60,7 @@ const CreateUserScreen = () => {
 
         {formErrors.length > 0 && <Errors errors={formErrors} />}
         {errors && <Errors errors={errors} />}
+        {loading && <Loading text="Adding new user ..." />}
         <form onSubmit={handleSubmit}>
           <label htmlFor="email" className="block">
             Enter email
@@ -76,8 +78,7 @@ const CreateUserScreen = () => {
 
           <button
             type="submit"
-            className="bg-white border-2 block px-3 py-1 text-black rounded flex items-center text-center"
-            disabled={loading}
+            className="bg-white border-2  px-3 py-1 text-black rounded flex items-center text-center"
           >
             <span className="mr-3">SUBMIT</span>
             {loading && <Spinner />}

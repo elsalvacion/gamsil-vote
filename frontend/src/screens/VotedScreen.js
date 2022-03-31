@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Zoom } from "react-awesome-reveal";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Card from "../components/Card";
@@ -21,10 +22,12 @@ const VotedScreen = () => {
             />
           </div>
         </div>
-        <p className="font-semibold text-lg my-5">
-          Please wait for the admin to release the results. You can wait here to
-          check your email.
-        </p>
+        <Zoom>
+          <p className="text-lg my-5 text-blue-700">
+            Please wait for the admin to release the results. You can wait here
+            to check your email.
+          </p>
+        </Zoom>
       </Card>
     </div>
   );

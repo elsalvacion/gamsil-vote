@@ -39,6 +39,13 @@ const sendEmail = (email, res) => {
           await transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
               console.log(error);
+              res.status(400).json({
+                errors: [
+                  {
+                    msg: "Could not send emails out",
+                  },
+                ],
+              });
             } else {
               console.log("Email sent: " + info.response);
               res.status(200).json({ msg: "User created" });
@@ -90,6 +97,13 @@ const sendVotes = async (users, winners, res) => {
     await transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log(error);
+        res.status(400).json({
+          errors: [
+            {
+              msg: "Could not send emails out",
+            },
+          ],
+        });
       } else {
         console.log("Email sent: " + info.response);
         res.json({ msg: "Results released" });
@@ -127,6 +141,13 @@ const sendStartVotes = async (users, res) => {
     await transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log(error);
+        res.status(400).json({
+          errors: [
+            {
+              msg: "Could not send emails out",
+            },
+          ],
+        });
       } else {
         console.log("Email sent: " + info.response);
         res.json({ msg: "start/stop successful" });

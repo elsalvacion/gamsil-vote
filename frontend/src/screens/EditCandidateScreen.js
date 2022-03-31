@@ -13,6 +13,7 @@ import {
 import { FaTimes } from "react-icons/fa";
 import { RiImageEditFill } from "react-icons/ri";
 import Loading from "../components/Loading";
+
 const EditCandidateScreen = () => {
   const dispatch = useDispatch();
 
@@ -118,6 +119,7 @@ const EditCandidateScreen = () => {
         {uploadingErrors && <Errors errors={uploadingErrors} />}
         {fetchCandidateErrors && <Errors errors={fetchCandidateErrors} />}
         {uploading && <Loading text="Uploading ..." />}
+        {loading && <Loading text="Updating candidate ..." />}
 
         <div className="flex flex-col justify-between">
           <label htmlFor="name" className="block">
@@ -129,7 +131,6 @@ const EditCandidateScreen = () => {
               name="file"
               accept="image/*"
               className="border-2 block w-full py-2 rounded px-2 mb-2"
-              disabled={uploading}
               onChange={(e) =>
                 setValues({ ...values, image: e.target.files[0] })
               }
@@ -177,7 +178,6 @@ const EditCandidateScreen = () => {
             value={values.name}
             onChange={handleChange}
             required
-            disabled={uploading}
           />
           <label htmlFor="category" className="block">
             Category
@@ -187,7 +187,6 @@ const EditCandidateScreen = () => {
             id="category"
             onChange={handleChange}
             className="border-2 block w-full py-2 rounded px-2 mb-5 bg-transparent"
-            disabled={uploading}
             value={values.category}
           >
             <>
@@ -215,7 +214,6 @@ const EditCandidateScreen = () => {
           <button
             type="submit"
             className="bg-white border-2 px-3 py-1 text-black rounded flex items-center text-center"
-            disabled={loading || uploading}
           >
             <span className="mr-3">UPDATE</span>
             {loading && <Spinner />}

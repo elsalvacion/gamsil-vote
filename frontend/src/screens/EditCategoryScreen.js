@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../components/Spinner";
 import { useHistory, useParams } from "react-router-dom";
 import { fetchSingleCategory, updateCategory } from "../actions/categoryAction";
+import Loading from "../components/Loading";
 const EditCategoryScreen = () => {
   const dispatch = useDispatch();
 
@@ -58,7 +59,7 @@ const EditCategoryScreen = () => {
         {formErrors.length > 0 && <Errors errors={formErrors} />}
         {errors && <Errors errors={errors} />}
         {fetchUserErrors && <Errors errors={fetchUserErrors} />}
-
+        {loading && <Loading text="Updating category " />}
         <form onSubmit={handleSubmit}>
           <label htmlFor="email" className="block">
             Edit title
@@ -75,8 +76,7 @@ const EditCategoryScreen = () => {
 
           <button
             type="submit"
-            className="bg-white border-2 block px-3 py-1 text-black rounded flex items-center text-center"
-            disabled={loading}
+            className="bg-white border-2 px-3 py-1 text-black rounded flex items-center text-center"
           >
             <span className="mr-3">SUBMIT</span>
             {loading && <Spinner />}

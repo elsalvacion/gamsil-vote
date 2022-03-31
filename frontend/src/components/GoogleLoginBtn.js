@@ -1,10 +1,9 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginUser } from "../actions/userAction";
 const GoogleLoginBtn = () => {
   const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.userLogin);
   const responseGoogle = (response) => {
     dispatch(loginUser(response.Du.tv));
   };
@@ -16,7 +15,6 @@ const GoogleLoginBtn = () => {
         onSuccess={responseGoogle}
         cookiePolicy={"single_host_origin"}
         className="w-full filter-none text-center"
-        disabled={loading}
       />
       <p className="py-3 text-blue-500 text-sm">
         * If you are not registered you cannot login either. Contact admin so

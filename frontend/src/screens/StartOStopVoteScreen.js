@@ -93,15 +93,23 @@ const StartOStopVoteScreen = () => {
             </>
           ) : null}
           <div className="h-1 bg-gray-500 my-3"></div>
-          <h2 className="my-2 font-semibold text-center">
-            {releaseResults ? "Releasing election results" : "Release results"}
-          </h2>
-          <Switch onChange={handleRelease} checked={releaseResults} />
-          {releaseSuccess && (
-            <p className="text-green-700 my-2 ">
-              * Election results send out to all users
-            </p>
-          )}
+          {getStartOStopSuccess ? (
+            isOpen === 0 ? (
+              <>
+                <h2 className="my-2 font-semibold text-center">
+                  {releaseResults
+                    ? "Releasing election results"
+                    : "Release results"}
+                </h2>
+                <Switch onChange={handleRelease} checked={releaseResults} />
+                {releaseSuccess && (
+                  <p className="text-green-700 my-2 ">
+                    * Election results send out to all users
+                  </p>
+                )}
+              </>
+            ) : null
+          ) : null}
         </div>
       </Card>
     </div>

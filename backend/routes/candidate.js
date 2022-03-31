@@ -65,7 +65,7 @@ router.post(
 );
 
 // get all candidate
-router.get("/", userProtect, adminProtect, (req, res) => {
+router.get("/", userProtect, (req, res) => {
   try {
     const query = req.query.category ? ` where category = ? ` : "";
     connection.query(
@@ -97,7 +97,7 @@ router.get("/", userProtect, adminProtect, (req, res) => {
   }
 });
 // get candidate
-router.get("/:id", userProtect, adminProtect, (req, res) => {
+router.get("/:id", userProtect, (req, res) => {
   try {
     connection.query(
       `select * from candidate where id = ?`,

@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Card from "../components/Card";
 import GoogleLoginBtn from "../components/GoogleLoginBtn";
+import Loading from "../components/Loading";
 import { VERIFY_USER_RESET } from "../reducers/types/userTypes";
 
 const LoginScreen = () => {
-  const { userInfo, errors } = useSelector((state) => state.userLogin);
+  const { userInfo, errors, loading } = useSelector((state) => state.userLogin);
   const history = useHistory();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -17,6 +18,7 @@ const LoginScreen = () => {
   }, [userInfo, history, dispatch]);
   return (
     <div className="h-full  flex justify-center ">
+      {loading && <Loading text="Verifying your credentials" />}
       <Card>
         <img
           src="/assets/gamsil.jpeg"
