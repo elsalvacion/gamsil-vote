@@ -24,14 +24,15 @@ const sendEmail = (email, res) => {
             to: email,
             subject: "Verify your email",
             html: `
-            <div style="padding: 10px; border: 1px solid #f4f4f4;">
-              <div style="display: flex; justify-content: center; margin-bottom: 15px;">
-              <img src="https://vote.stigaoutwear.com/assets/gamsil.jpeg" style="
-              width: 175px;
-              height: 175px;
-              object-fit: cover;
-              " />
-              </div>
+            <div style="padding: 10px; border: 1px solid #f5f5f5;
+            ">
+            <div style="display: flex; justify-content: center; margin-bottom: 15px; width: 100%;">
+            <img src="https://vote.stigaoutwear.com/assets/gamsil.jpeg" style="
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            " />
+            </div>
               <p>You have been registered to vote in the gamsil upcoming election.</p>
               <p>However, if your email is not verified you cannot vote.</p>
               <br />
@@ -79,15 +80,16 @@ const sendVotes = async (users, winners, res) => {
       background: url(https://media.giphy.com/media/DBjacCxZrCIK217NiO/giphy.gif);
       background-repeat: no-repeat;
       background-size: cover;
-      border: 1px solid #f4f4f4;
+      border: 1px solid #f5f5f5;
+      
       ">
-      <div style="display: flex; justify-content: center; margin-bottom: 15px;">
-              <img src="https://vote.stigaoutwear.com/assets/gamsil.jpeg" style="
-              width: 175px;
-              height: 175px;
-              object-fit: cover;
-              " />
-              </div>
+      <div style="display: flex; justify-content: center; margin-bottom: 15px; width: 100%;">
+        <img src="https://vote.stigaoutwear.com/assets/gamsil.jpeg" style="
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        " />
+        </div>
         <p>The Gamsil management thank you for participating in this election voting. Here are your new executives:</p>
         <div style="
         width: 100%;
@@ -147,11 +149,12 @@ const sendStartVotes = async (users, res) => {
       <div style="
         background: white;
         padding: 10px;
+        border: 1px solid #f5f5f5;
         ">
-        <div style="display: flex; justify-content: center; margin-bottom: 15px;">
+        <div style="display: flex; justify-content: center; margin-bottom: 15px; width: 100%;">
         <img src="https://vote.stigaoutwear.com/assets/gamsil.jpeg" style="
-        width: 175px;
-        height: 175px;
+        width: 150px;
+        height: 150px;
         object-fit: cover;
         " />
         </div>
