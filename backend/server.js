@@ -18,10 +18,11 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use(express.static(path.join(__dirname, "public")));
+// app.use(express.static("/verify"));
 
-// app.get("/*", (req, res) =>
-//   res.sendFile(path.join(__dirname, "public", "index.html"))
-// );
+app.get("/*", (req, res) =>
+  res.sendFile(path.join(__dirname, "public", "index.html"))
+);
 
 app.use("/category", category);
 app.use("/candidate", candidate);
