@@ -80,9 +80,9 @@ const sendVotes = async (users, winners, res) => {
         margin-bottom: 20px;
         ">
         ${winners
-          .map(
-            (winner) =>
-              `<div style="
+          .map((winner) =>
+            winner
+              ? `<div style="
               margin: 10px 5px;
               display: flex;
               ">
@@ -92,6 +92,7 @@ const sendVotes = async (users, winners, res) => {
                <p>  <i>${winner.category}</i> </p> 
               </div>  
             </div>`
+              : null
           )
           .join("")}
         
