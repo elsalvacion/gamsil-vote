@@ -20,7 +20,7 @@ app.use(morgan("dev"));
 // app.use(express.static("/verify"));
 
 app.use(express.static(path.join(__dirname, "public")));
-app.get("*", (req, res) => {
+app.get("/verify/:id", (req, res) => {
   app.use(express.static(path.join(__dirname, "public")));
 
   res.sendFile(path.join(__dirname, "public", "index.html"));
