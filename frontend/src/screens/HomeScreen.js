@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { fetchCategory } from "../actions/categoryAction";
@@ -8,6 +8,7 @@ import Errors from "../components/Errors";
 import Card from "../components/Card";
 import Loading from "../components/Loading";
 import { SEND_VOTE_RESET } from "../reducers/types/voteTypes";
+import VoteHelp from "../components/VoteHelp";
 
 const HomeScreen = () => {
   const { userInfo } = useSelector((state) => state.userLogin);
@@ -59,7 +60,7 @@ const HomeScreen = () => {
     getStartOStopSuccess,
     isOpen,
   ]);
-
+  const [open, setOpen] = useState(true);
   const handleVote = () => {
     const isVotes = localStorage.getItem("votes")
       ? Array.from(JSON.parse(localStorage.getItem("votes")))
@@ -78,6 +79,23 @@ const HomeScreen = () => {
         opacity: votingLoading ? 0.5 : 1,
       }}
     >
+      {categories && categories.length > 0 && open && (
+        <VoteHelp open={open} close={() => setOpen(!open)} />
+      )}
+      <div
+        className={`my-3 mx-auto p-3 ${
+          categories && categories.length ? "flex items-center" : "hidden"
+        }`}
+      >
+        <p className="text-white mr-3 font-semibold">Having trouble voting.</p>
+        <button
+          className="p-1 rounded bg-gray-100"
+          onClick={() => setOpen(!open)}
+        >
+          Click here
+        </button>
+      </div>
+
       {getStartOStopLoading && <Loading text="Checking if voting is open" />}
       {votingLoading && (
         <Loading text="We will be done soon. Sending vote ...." />
@@ -100,17 +118,14 @@ const HomeScreen = () => {
           <VoteCategory key={category.id} category={category.title} />
         ))
       )}
-      {categories && categories.length > 0 ? (
-        <button
-          onClick={handleVote}
-          className="border-2 py-2 rounded text-center text-lg block w-1/2 m-3 mx-auto bg-blue-500 text-white hover:bg-blue-700 mb-5"
-          // disabled={
-        >
-          VOTE
-        </button>
-      ) : (
-        <p className="text-white">No candiates</p>
-      )}
+      <button
+        onClick={handleVote}
+        className={` border-2 py-2 px-20 rounded text-center text-lg ${
+          categories && categories.length > 0 ? "block" : "hidden"
+        } m-3 mx-auto bg-blue-500 text-white hover:bg-blue-700 mb-5`}
+      >
+        SUBMIT
+      </button>
     </div>
   );
 };

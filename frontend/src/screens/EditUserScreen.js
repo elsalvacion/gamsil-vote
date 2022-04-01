@@ -53,7 +53,7 @@ const EditUserScreen = () => {
     }
   };
   return (
-    <div className="h-screen flex justify-center">
+    <div className="h-full w-full  flex justify-center">
       <Card>
         <h2 className="mb-5 font-bold uppercase text-center text-xl">
           EDIT USER

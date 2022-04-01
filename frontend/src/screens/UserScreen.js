@@ -47,7 +47,7 @@ const UserScreen = () => {
     }
   };
   return (
-    <div className="h-screen flex justify-center">
+    <div className="h-full w-full  flex justify-center">
       <Card>
         {/* header */}
         <div className="py-3 flex justify-between">

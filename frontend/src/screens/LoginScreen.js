@@ -17,7 +17,7 @@ const LoginScreen = () => {
     });
   }, [userInfo, history, dispatch]);
   return (
-    <div className="h-full  flex justify-center ">
+    <div className="h-full w-full  flex justify-center ">
       {loading && <Loading text="Verifying your credentials" />}
       <Card>
         <img

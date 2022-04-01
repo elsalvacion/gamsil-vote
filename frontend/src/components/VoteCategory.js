@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { FaCheck } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../actions/userAction";
 import store from "../store";
@@ -81,7 +82,7 @@ const VoteCategory = ({ category }) => {
   };
 
   return candidates && candidates.length > 0 ? (
-    <div className="rounded w-11/12 md:9/12 mx-auto mt-4 bg-gray-50 p-3">
+    <div className="rounded w-11/12 md:9/12 mx-auto mt-4 bg-gray-50 p-3 ">
       <h2 className="my-2 font-semibold text-xl uppercase">{category}</h2>
       <div className="flex flex-wrap justify-center items-stretch">
         {loading ? (
@@ -91,12 +92,17 @@ const VoteCategory = ({ category }) => {
           candidates.map((candidate) => (
             <div
               key={candidate.id}
-              className={`w-5/12 md:w-72 rounded-md shadow-md m-2 bg-white ${
+              className={`mb-6 w-5/12 md:w-72 relative rounded-md shadow-md m-2 bg-white ${
                 vote === candidate.id &&
                 " border-2 outline-2 outline-green-700 border-green-700 shadow-green-700 drop-shadow-md "
               }`}
               onClick={() => handleVote(candidate.id)}
             >
+              {vote === candidate.id && (
+                <div className="absolute rounded -top-4 -right-4 p-2 bg-green-700">
+                  <FaCheck fontSize={20} className="text-white" />
+                </div>
+              )}
               <img
                 src={candidate.image}
                 className="w-28 h-28 rounded-full mx-auto  object-cover p-2"

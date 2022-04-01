@@ -11,7 +11,7 @@ const VotedScreen = () => {
     if (!userInfo) history.push("/");
   }, [userInfo, history]);
   return (
-    <div className="h-full flex justify-center">
+    <div className="h-full w-full  flex justify-center">
       <Card>
         <div className="w-full h-56 md:h-80 relative flex justify-center items-center">
           <div className="absolute top-0 left-0 right-0 bottom-0">

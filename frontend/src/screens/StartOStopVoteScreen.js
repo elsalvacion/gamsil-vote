@@ -60,7 +60,7 @@ const StartOStopVoteScreen = () => {
     setReleaseResults(!releaseResults);
   };
   return (
-    <div className="h-full flex justify-center">
+    <div className="h-full w-full  flex justify-center">
       <Card>
         {releaseLoading && <Loading text="Sending... election results" />}
         {startElectionLoading && <Loading text="Processing..." />}
