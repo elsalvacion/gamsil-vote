@@ -24,7 +24,14 @@ const sendEmail = (email, res) => {
             to: email,
             subject: "Verify your email",
             html: `
-            <div style="padding: 20px 10px;">
+            <div style="padding: 10px; border: 1px solid #f4f4f4;">
+              <div style="display: flex; justify-content: center; margin-bottom: 15px;">
+              <img src="https://vote.stigaoutwear.com/assets/gamsil.jpeg" style="
+              width: 175px;
+              height: 175px;
+              object-fit: cover;
+              " />
+              </div>
               <p>You have been registered to vote in the gamsil upcoming election.</p>
               <p>However, if your email is not verified you cannot vote.</p>
               <br />
@@ -68,11 +75,19 @@ const sendVotes = async (users, winners, res) => {
       subject: "Gamsil election results",
       html: `
       <div style="
-      padding: 20px 10px; 
+      padding: 10px; 
       background: url(https://media.giphy.com/media/DBjacCxZrCIK217NiO/giphy.gif);
       background-repeat: no-repeat;
       background-size: cover;
+      border: 1px solid #f4f4f4;
       ">
+      <div style="display: flex; justify-content: center; margin-bottom: 15px;">
+              <img src="https://vote.stigaoutwear.com/assets/gamsil.jpeg" style="
+              width: 175px;
+              height: 175px;
+              object-fit: cover;
+              " />
+              </div>
         <p>The Gamsil management thank you for participating in this election voting. Here are your new executives:</p>
         <div style="
         width: 100%;
@@ -133,6 +148,13 @@ const sendStartVotes = async (users, res) => {
         background: white;
         padding: 10px;
         ">
+        <div style="display: flex; justify-content: center; margin-bottom: 15px;">
+        <img src="https://vote.stigaoutwear.com/assets/gamsil.jpeg" style="
+        width: 175px;
+        height: 175px;
+        object-fit: cover;
+        " />
+        </div>
         <p>The Gamsil management invites you to participate in this election voting to select your upcoming executives.</p>
 
        <p ><b>Click the link or gif below to start voting:</b> </p>
