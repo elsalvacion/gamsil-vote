@@ -88,6 +88,7 @@ const sendVotes = async (users, winners, res) => {
         width: 150px;
         height: 150px;
         object-fit: cover;
+        margin: 0 auto;
         " />
         </div>
         <p>The Gamsil management thank you for participating in this election voting. Here are your new executives:</p>
@@ -156,6 +157,7 @@ const sendStartVotes = async (users, res) => {
         width: 150px;
         height: 150px;
         object-fit: cover;
+        margin: 0 auto;
         " />
         </div>
         <p>The Gamsil management invites you to participate in this election voting to select your upcoming executives.</p>
