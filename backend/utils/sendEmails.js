@@ -37,7 +37,7 @@ const sendEmail = (email, res) => {
               <p>However, if your email is not verified you cannot vote.</p>
               <br />
               <p><b>Visit the link below to verify your email: </b></p>
-              <a href="${`https://vote.stigaoutwear.com/verify/${findUserRes[0].id}`}"">https://vote.stigaoutwear.com/verify/${
+              <a href="${`https://vote.stigaoutwear.com/#/verify/${findUserRes[0].id}`}"">https://vote.stigaoutwear.com/verify/${
               findUserRes[0].id
             }</a>
             </div>
