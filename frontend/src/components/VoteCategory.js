@@ -80,7 +80,7 @@ const VoteCategory = ({ category }) => {
     }
   };
 
-  return candidates ? (
+  return candidates && candidates.length > 0 ? (
     <div className="rounded w-11/12 md:9/12 mx-auto mt-4 bg-gray-50 p-3">
       <h2 className="my-2 font-semibold text-xl uppercase">{category}</h2>
       <div className="flex flex-wrap justify-center items-stretch">
