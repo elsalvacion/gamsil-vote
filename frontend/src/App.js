@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Switch } from "react-router-dom";
 import Nav from "./components/Nav";
 import AdminPanelSceen from "./screens/AdminPanelSceen";
 import CandidateScreen from "./screens/CandidateScreen";
@@ -20,7 +20,7 @@ import VotingNotOpenScreen from "./screens/VotingNotOpenScreen";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Nav />
       <Switch>
         <div className="pt-3 min-h-screen  bg-gradient-to-b  from-blue-900 via-white to-green-900">
@@ -68,7 +68,7 @@ const App = () => {
           />
         </div>
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
