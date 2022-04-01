@@ -100,21 +100,17 @@ const HomeScreen = () => {
           <VoteCategory key={category.id} category={category.title} />
         ))
       )}
-      <button
-        onClick={handleVote}
-        className="border-2 py-2 rounded text-center text-lg block w-1/2 m-3 mx-auto bg-blue-500 text-white hover:bg-blue-700 mb-5"
-        // disabled={
-        //   localStorage.getItem("votes")
-        //     ? categories &&
-        //       Array.from(JSON.parse(localStorage.getItem("votes"))).length ===
-        //         categories.length
-        //       ? false
-        //       : true
-        //     : true
-        // }
-      >
-        VOTE
-      </button>
+      {categories && categories.length > 0 ? (
+        <button
+          onClick={handleVote}
+          className="border-2 py-2 rounded text-center text-lg block w-1/2 m-3 mx-auto bg-blue-500 text-white hover:bg-blue-700 mb-5"
+          // disabled={
+        >
+          VOTE
+        </button>
+      ) : (
+        <p className="text-white">No candiates</p>
+      )}
     </div>
   );
 };
