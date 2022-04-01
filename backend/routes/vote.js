@@ -102,10 +102,22 @@ router.get("/release", userProtect, adminProtect, (req, res) => {
                         ],
                       });
                     } else {
-                      winners.push(votesRes[0]);
+                      if (votesRes[0] && votesRes[0].votes > 0) {
+                        winners.push(votesRes[0]);
+                      }
                       if (i === catRes.length - 1) {
-                        console.log(winners);
-                        sendVotes(users, winners, res);
+                        if (winners.length > 0) {
+                          console.log(winners);
+                          sendVotes(users, winners, res);
+                        } else {
+                          res.status(400).json({
+                            errors: [
+                              {
+                                msg: "No votes made so far",
+                              },
+                            ],
+                          });
+                        }
                       }
                     }
                   }

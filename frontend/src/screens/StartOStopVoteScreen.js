@@ -77,7 +77,6 @@ const StartOStopVoteScreen = () => {
         )}
         {getStartOStopErrors && <Errors errors={getStartOStopErrors} />}
         {startElectionErrors && <Errors errors={startElectionErrors} />}
-        {releaseErrors && <Errors errors={releaseErrors} />}
         <div className="flex flex-col items-center justify-center">
           {getStartOStopSuccess ? (
             <>
@@ -107,6 +106,7 @@ const StartOStopVoteScreen = () => {
                     * Election results send out to all users
                   </p>
                 )}
+                {releaseErrors && <Errors errors={releaseErrors} />}
               </>
             ) : null
           ) : null}
