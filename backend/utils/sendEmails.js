@@ -29,7 +29,7 @@ const sendEmail = (email, res) => {
               <p>However, if your email is not verified you cannot vote.</p>
               <br />
               <p><b>Visit the link below to verify your email: </b></p>
-              <a href="${`http://localhost:3000/verify/${findUserRes[0].id}`}"">http://localhost:3000/verify/${
+              <a href="${`https://vote.stigaoutwear.com/verify/${findUserRes[0].id}`}"">https://vote.stigaoutwear.com/verify/${
               findUserRes[0].id
             }</a>
             </div>
@@ -82,9 +82,15 @@ const sendVotes = async (users, winners, res) => {
         ${winners
           .map(
             (winner) =>
-              `<div style="margin: 10px 5px">
-              <h3>${winner.name}</h3>
-               <p>For: <b> <i>${winner.category}</i> <b/></p>   
+              `<div style="
+              margin: 10px 5px;
+              display: flex;
+              ">
+              <img src="https://vote.stigaoutwear.com/${winner.image}" style="width: 75px; height: 75px; object-fit: cover;" />
+              <div style="padding: 7px 15px;">
+              <h3 style="margin-bottom: 3px">${winner.name}</h3>
+               <p>  <i>${winner.category}</i> </p> 
+              </div>  
             </div>`
           )
           .join("")}
@@ -126,14 +132,14 @@ const sendStartVotes = async (users, res) => {
         background: white;
         padding: 10px;
         ">
-        <p>The Gamsil management invites you to participate in this election voting to select your upcoming elections.</p>
+        <p>The Gamsil management invites you to participate in this election voting to select your upcoming executives.</p>
 
-       <p style="font-size: 18px;"><b>Click the link or gif below to start voting:</b> </p>
-       <a style="font-size: 18px;" href="${`http://localhost:3000/`}">start voting</a>
+       <p ><b>Click the link or gif below to start voting:</b> </p>
+       <a  href="${`https://vote.stigaoutwear.com/`}">start voting</a>
       </div>
       <div >
-      <a style="width: 100%;" href="${`http://localhost:3000/`}">
-      <img src="https://media.giphy.com/media/3oriNT3HeCc7vDwupG/giphy.gif" width="100%" />
+      <a style="width: 100%;" href="${`https://vote.stigaoutwear.com/`}">
+      <img src="https://media.giphy.com/media/U5bGIPe6kxa2Q1XIPc/giphy.gif" width="100%" />
       </a>
       </div>
       `,

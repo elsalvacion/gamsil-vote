@@ -2,7 +2,7 @@ const express = require("express");
 require("dotenv").config();
 const morgan = require("morgan");
 const fileupload = require("express-fileupload");
-
+const path = require("path");
 const category = require("./routes/category");
 const user = require("./routes/user");
 const candidate = require("./routes/candidate");
@@ -17,7 +17,11 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
+
+// app.get("/*", (req, res) =>
+//   res.sendFile(path.join(__dirname, "public", "index.html"))
+// );
 
 app.use("/category", category);
 app.use("/candidate", candidate);

@@ -75,23 +75,42 @@ router.get("/release", userProtect, adminProtect, (req, res) => {
             users.push(user.email);
           });
 
-          connection.query(
-            `select name, category, image from candidate where votes = (select max(votes) from candidate )`,
-            (votesErr, votesRes) => {
-              if (votesErr) {
-                console.log(votesErr);
-                return res.status(400).json({
-                  errors: [
-                    {
-                      msg: "Could not get votes",
-                    },
-                  ],
-                });
-              } else {
-                sendVotes(users, votesRes, res);
-              }
+          connection.query(`select * from category`, (catrr, catRes) => {
+            if (catrr) {
+              console.log(catrr);
+              res.status(400).json({
+                errors: [
+                  {
+                    msg: "Could not fetch candidates",
+                  },
+                ],
+              });
+            } else {
+              const winners = [];
+              catRes.forEach((category, i) => {
+                connection.query(
+                  `select * from candidate where votes = (select max(votes) from candidate where category = ?)`,
+                  [category.title],
+                  (votesErr, votesRes) => {
+                    if (votesErr) {
+                      console.log(votesErr);
+                      return res.status(400).json({
+                        errors: [
+                          {
+                            msg: "Could not fetch votes",
+                          },
+                        ],
+                      });
+                    } else {
+                      winners.push(votesRes[0]);
+                      if (i === catRes.length - 1)
+                        sendVotes(users, winners, res);
+                    }
+                  }
+                );
+              });
             }
-          );
+          });
         }
       }
     );
