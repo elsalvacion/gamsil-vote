@@ -103,8 +103,10 @@ router.get("/release", userProtect, adminProtect, (req, res) => {
                       });
                     } else {
                       winners.push(votesRes[0]);
-                      if (i === catRes.length - 1)
+                      if (i === catRes.length - 1) {
+                        console.log(winners);
                         sendVotes(users, winners, res);
+                      }
                     }
                   }
                 );
