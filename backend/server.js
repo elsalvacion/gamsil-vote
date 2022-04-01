@@ -13,9 +13,9 @@ const app = express();
 app.use(fileupload());
 app.use(express.json());
 
-if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
-}
+// if (process.env.NODE_ENV === "development") {
+app.use(morgan("dev"));
+// }
 
 app.use(express.static(path.join(__dirname, "public")));
 // app.use(express.static("/verify"));
