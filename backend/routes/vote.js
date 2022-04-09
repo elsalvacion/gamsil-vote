@@ -71,11 +71,8 @@ router.get("/release", userProtect, adminProtect, (req, res) => {
           });
         } else {
           const users = [];
-          let voted = 0;
-          const totalUsers = getUsersRes.length;
           getUsersRes.forEach((user) => {
             users.push(user.email);
-            if (user.voted === 1) voted++;
           });
 
           connection.query(
@@ -92,7 +89,7 @@ router.get("/release", userProtect, adminProtect, (req, res) => {
                   ],
                 });
               } else {
-                sendVotes(users, votesRes, voted, totalUsers, res);
+                sendVotes(users, votesRes, res);
               }
             }
           );
