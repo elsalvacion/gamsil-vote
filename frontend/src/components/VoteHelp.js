@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FaHandPointer, FaTimes } from "react-icons/fa";
 const VoteHelp = ({ open, close }) => {
   return (

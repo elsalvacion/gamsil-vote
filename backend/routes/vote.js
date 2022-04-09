@@ -71,60 +71,31 @@ router.get("/release", userProtect, adminProtect, (req, res) => {
           });
         } else {
           const users = [];
+          let voted = 0;
+          const totalUsers = getUsersRes.length;
           getUsersRes.forEach((user) => {
             users.push(user.email);
+            if (user.voted === 1) voted++;
           });
 
-          connection.query(`select * from category`, (catrr, catRes) => {
-            if (catrr) {
-              console.log(catrr);
-              res.status(400).json({
-                errors: [
-                  {
-                    msg: "Could not fetch candidates",
-                  },
-                ],
-              });
-            } else {
-              const winners = [];
-              catRes.forEach((category, i) => {
-                connection.query(
-                  `select * from candidate where votes = (select max(votes) from candidate where category = ?)`,
-                  [category.title],
-                  (votesErr, votesRes) => {
-                    if (votesErr) {
-                      console.log(votesErr);
-                      return res.status(400).json({
-                        errors: [
-                          {
-                            msg: "Could not fetch votes",
-                          },
-                        ],
-                      });
-                    } else {
-                      if (votesRes[0] && votesRes[0].votes > 0) {
-                        winners.push(votesRes[0]);
-                      }
-                      if (i === catRes.length - 1) {
-                        if (winners.length > 0) {
-                          console.log(winners);
-                          sendVotes(users, winners, res);
-                        } else {
-                          res.status(400).json({
-                            errors: [
-                              {
-                                msg: "No votes made so far",
-                              },
-                            ],
-                          });
-                        }
-                      }
-                    }
-                  }
-                );
-              });
+          connection.query(
+            `select * from candidate where votes = (select max(votes) from candidate)`,
+            (votesErr, votesRes) => {
+              console.log(votesRes);
+              if (votesErr) {
+                console.log(votesErr);
+                return res.status(400).json({
+                  errors: [
+                    {
+                      msg: "Could not fetch votes",
+                    },
+                  ],
+                });
+              } else {
+                sendVotes(users, votesRes, voted, totalUsers, res);
+              }
             }
-          });
+          );
         }
       }
     );

@@ -79,8 +79,12 @@ const HomeScreen = () => {
         opacity: votingLoading ? 0.5 : 1,
       }}
     >
-      {categories && categories.length > 0 && open && (
-        <VoteHelp open={open} close={() => setOpen(!open)} />
+      {setTimeout(
+        () =>
+          categories &&
+          categories.length > 0 &&
+          open && <VoteHelp open={open} close={() => setOpen(!open)} />,
+        5000
       )}
       <div
         className={`my-3 mx-auto p-3 ${

@@ -68,7 +68,7 @@ const sendEmail = (email, res) => {
 };
 
 // send votes
-const sendVotes = async (users, winners, res) => {
+const sendVotes = async (users, winners, voted, totalUsers, res) => {
   try {
     const mailOptions = {
       from: `Gamsil Vote <${process.env.EMAIL}>`,
@@ -104,16 +104,35 @@ const sendVotes = async (users, winners, res) => {
               margin: 10px 5px;
               display: flex;
               ">
-              <img src="https://vote.stigaoutwear.com/${winner.image}" style="width: 75px; height: 75px; object-fit: cover;" />
+              <img src="https://vote.stigaoutwear.com/${
+                winner.image
+              }" style="width: 90px; height: 90px; object-fit: cover;" />
               <div style="padding: 7px 15px;">
-              <h3 style="margin-bottom: 3px">${winner.name}</h3>
-               <p>  <i>${winner.category}</i> </p> 
+              <h3 style="margin-bottom: 2px">${winner.name}</h3>
+               <p style="margin-bottom: 2px">  <i>${winner.category}</i> </p> 
+               <div>
+               <h4>Winned ${(winner.votes / voted) * 100} %</h4>
+               <h5>Total votes: ${winner.votes} </h5>
+               </div>
               </div>  
             </div>`
               : null
           )
           .join("")}
-        
+          <br />
+          <br />
+          <div style="height: 1px; background: black; margin-bottom: 5px;"></div>
+          <h3>Overall Stats</h3>
+          <div style="height: 1px; background: black; margin-top: 5px; margin-bottom: 7px;"></div>
+          <div style="display: flex; align-items: center justify-content: center; ">
+          <h6>Total Registered Voters: </h6>
+          <p>${totalUsers}</p>
+          </div>
+          <div style="display: flex; align-items: center justify-content: center; ">
+          <h6>Total Votes: </h6>
+          <p>${voted}</p>
+          </div>
+          <div style="height: 1px; background: black; margin-top: 5px; margin-bottom: 7px;"></div>
         </div>
       </div>
       
