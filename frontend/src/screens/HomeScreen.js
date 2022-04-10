@@ -60,7 +60,7 @@ const HomeScreen = () => {
     getStartOStopSuccess,
     isOpen,
   ]);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const handleVote = () => {
     const isVotes = localStorage.getItem("votes")
       ? Array.from(JSON.parse(localStorage.getItem("votes")))
@@ -79,13 +79,7 @@ const HomeScreen = () => {
         opacity: votingLoading ? 0.5 : 1,
       }}
     >
-      {setTimeout(
-        () =>
-          categories &&
-          categories.length > 0 &&
-          open && <VoteHelp open={open} close={() => setOpen(!open)} />,
-        5000
-      )}
+      {open && <VoteHelp open={open} close={() => setOpen(!open)} />}
       <div
         className={`my-3 mx-auto p-3 ${
           categories && categories.length ? "flex items-center" : "hidden"

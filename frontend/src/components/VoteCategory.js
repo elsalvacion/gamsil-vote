@@ -92,7 +92,7 @@ const VoteCategory = ({ category }) => {
           candidates.map((candidate) => (
             <div
               key={candidate.id}
-              className={`mb-6 w-5/12 md:w-72 relative rounded-md shadow-md m-2 bg-white ${
+              className={`mb-6 cursor-pointer w-5/12 md:w-72 relative rounded-md shadow-md hover:shadow-lg m-2 bg-white ${
                 vote === candidate.id &&
                 " border-2 outline-2 outline-green-700 border-green-700 shadow-green-700 drop-shadow-md "
               }`}

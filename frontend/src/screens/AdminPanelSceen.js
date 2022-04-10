@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import Card from "../components/Card";
+import { BiCategory } from "react-icons/bi";
+import { FaUsers } from "react-icons/fa";
+import { ImSwitch } from "react-icons/im";
+import { GiPodiumWinner } from "react-icons/gi";
 const AdminPanelSceen = () => {
   const { userInfo } = useSelector((state) => state.userLogin);
   const history = useHistory();
@@ -13,35 +16,51 @@ const AdminPanelSceen = () => {
     {
       title: "categories",
       path: "/category",
+      icon: (
+        <BiCategory fontSize={50} className="my-3 text-center text-blue-600" />
+      ),
     },
     {
       title: "candidates",
       path: "/candidate",
+      icon: (
+        <GiPodiumWinner
+          fontSize={50}
+          className="my-3 text-center text-blue-600"
+        />
+      ),
     },
     {
       title: "start/stop vote",
       path: "/start-or-stop-vote",
+      icon: (
+        <ImSwitch fontSize={50} className="my-3 text-center text-blue-600" />
+      ),
     },
     {
       title: "users",
       path: "/user",
+      icon: (
+        <FaUsers fontSize={50} className="my-3 text-center text-blue-600" />
+      ),
     },
   ];
   return (
-    <div className="h-full w-full  flex justify-center pt-7">
-      <Card>
-        <div className="flex flex-col items-center">
-          {links.map((link) => (
-            <button
-              key={link.title}
-              className="bg-blue-500 text-white text-center py-3 w-9/12 md:w-64 rounded hover:bg-blue-700 my-3 text-lg uppercase "
-              onClick={() => history.push(link.path)}
-            >
+    <div className="h-full w-full pt-7">
+      <div className="grid gap-3 grid-cols-1 md:grid-cols-2 p-3 md:p-7 lg:w-9/12 lg:mx-auto">
+        {links.map((link) => (
+          <div
+            key={link.title}
+            className={`flex flex-col items-center bg-white shadow-md hover:shadow-xl hover:rounded-2xl rounded py-7 cursor-pointer`}
+            onClick={() => history.push(link.path)}
+          >
+            {link.icon}
+            <h2 className="my-3 text-center uppercase text-2xl">
               {link.title}
-            </button>
-          ))}
-        </div>
-      </Card>
+            </h2>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

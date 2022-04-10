@@ -8,7 +8,7 @@ const Nav = () => {
   const dispatch = useDispatch();
   return (
     <div
-      className={`bg-gradient-to-r  from-red-900 text-center py-4 px-2 flex items-center ${
+      className={`bg-red-700 text-center py-4 px-2 flex items-center ${
         userInfo && Number(userInfo.isAdmin)
           ? "flex-col justify-center"
           : "flex-row justify-between"
@@ -28,14 +28,14 @@ const Nav = () => {
           {Number(userInfo.isAdmin) ? (
             <Link
               to="/adminpanel"
-              className="px-2 text-blue-900 py-1 border-2 border-blue-800 rounded-sm mx-1 hover:bg-blue-900 hover:text-gray-50 hover:border-gray-50"
+              className="p-3 text-blue-900 rounded mx-1 hover:bg-blue-900 hover:text-gray-50  bg-white"
             >
               ADMIN PANEL
             </Link>
           ) : null}
           <Link
             to="#!"
-            className="px-2 text-blue-900 py-1 border-2 border-blue-800 rounded-sm mx-1 hover:bg-blue-900 hover:text-gray-50 hover:border-gray-50"
+            className="p-3 text-blue-900 rounded mx-1 hover:bg-blue-900 hover:text-gray-50  bg-white"
             onClick={() => dispatch(logoutUser())}
           >
             LOGOUT
