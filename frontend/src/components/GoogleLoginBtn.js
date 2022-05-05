@@ -5,7 +5,8 @@ import { loginUser } from "../actions/userAction";
 const GoogleLoginBtn = () => {
   const dispatch = useDispatch();
   const responseGoogle = (response) => {
-    dispatch(loginUser(response.Du.tv));
+    // console.log(response.profileObj.email)
+    dispatch(loginUser(response.profileObj.email));
   };
   return (
     <>
