@@ -24,8 +24,7 @@ const VotedScreen = () => {
         </div>
         <Zoom>
           <p className="text-lg my-5 text-blue-700">
-            Please wait for the admin to release the results. You can wait here
-            to check your email.
+            Please wait for the admin to release the results. Results will be sent to your emai.
           </p>
         </Zoom>
       </Card>
