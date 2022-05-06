@@ -78,7 +78,6 @@ export const fetchUsers = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get("/user", config);
-    console.log(data);
     dispatch({
       type: FETCH_USERS_SUCCESS,
       payload: data.msg,
@@ -119,7 +118,6 @@ export const fetchSingleUser = (id) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(`/user/${id}`, config);
-    console.log(data);
     dispatch({
       type: FETCH_SINGLE_USER_SUCCESS,
       payload: data.msg,
